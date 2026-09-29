@@ -9,7 +9,8 @@ If CS2 isn't found automatically, it asks for the path to `...\game\csgo\cfg`.
 
 **Linux:** `./gen.py` (Python 3.11+) installs straight into the Steam CS2 dir (override with `CS2_DIR`).
 
-Then set the CS2 launch option `+exec autoexec` (or type `exec autoexec` once per game start).
+**Required:** add `+exec autoexec` to the CS2 launch options (Steam → right-click CS2 → Properties → General → Launch Options).
+Without it the `kt_*` commands don't exist until you type `exec autoexec` in the console.
 
 ## Usage
 
@@ -48,5 +49,5 @@ Get the values ingame with `getpos`.
 
 ## How it works
 
-CS2 runs `gamemode_<mode>_server.cfg` last on every map load. The installer adds `kt_onload` there,
+`kt_start` loads the map in casual mode, and CS2 runs `gamemode_casual_server.cfg` last on every map load. The installer adds `kt_onload` there,
 which does nothing until `kt_start` arms it to exec `kt/settings.cfg`. All other files live in `cfg/kt/`.

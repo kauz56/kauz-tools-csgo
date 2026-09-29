@@ -12,9 +12,8 @@ CS2 = Path(os.environ.get("CS2_DIR", Path.home() / ".local/share/Steam/steamapps
 CFG = CS2 / "game/csgo/cfg"
 NAME = "kauz-tools-csgo"
 HOOK = "// kauz-tools hook: runs kt_onload (no-op unless kt_start armed it)"
-# CS2 execs gamemode_<mode>_server.cfg last on every map load (see gamemodes.txt)
-MODES = ["casual", "competitive", "competitive2v2", "deathmatch", "armsrace", "demolition", "custom", "training",
-         "cooperative", "coopmission", "survival"]
+# CS2 execs gamemode_<mode>_server.cfg last on every map load (see gamemodes.txt); kt_start forces casual
+MODES = ["casual"]
 
 
 def num(x):
@@ -49,7 +48,7 @@ def build(cfg):
         'alias kt_noop ""\n'
         'alias kt_onload kt_noop\n'
         'alias kt_load "echo kt: kt_set_map_<map> first"\n'
-        'alias kt_start "alias kt_onload kt_apply; kt_load"\n'
+        'alias kt_start "alias kt_onload kt_apply; game_type 0; game_mode 0; kt_load"\n'
         'alias kt_apply "exec kt/settings"\n'
         + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}"\n' for m in maps)
         + "exec kt/reset\n")
