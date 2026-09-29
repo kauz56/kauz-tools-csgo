@@ -4,7 +4,7 @@
 ./gen.py         install into the local CS2 cfg dir
 ./gen.py --zip   build dist/kauz-tools-csgo.zip (Windows installer included)
 """
-import os, shutil, sys, tempfile, tomllib
+import os, random, re, shutil, sys, tempfile, tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -29,6 +29,22 @@ def load(name):
     return spots
 
 
+def shuffle(m, ss, n=64):
+    """kt_go_<team>_random: no RNG in cfg, so cycle through a pre-shuffled spawn sequence."""
+    rng, out = random.Random(m), ""
+    for team in ("ct", "t"):
+        spawns = [s for s in ss if re.fullmatch(rf"{team}_\d+", s)]
+        if len(spawns) < 2:
+            continue
+        seq = [rng.choice(spawns)]
+        while len(seq) < n or seq[-1] == seq[0]:
+            seq.append(rng.choice([s for s in spawns if s != seq[-1]]))
+        out += f"alias kt_go_{team}_random kt_rnd_{team}_0\n" + "".join(
+            f'alias kt_rnd_{team}_{i} "kt_go_{s}; alias kt_go_{team}_random kt_rnd_{team}_{(i + 1) % len(seq)}"\n'
+            for i, s in enumerate(seq))
+    return out
+
+
 def build(cfg):
     """Write cfg/kt/ and return (maps, spot names)."""
     maps = sorted({f.stem for f in (ROOT / "data").glob("*/*.toml")})
@@ -39,15 +55,17 @@ def build(cfg):
     shutil.rmtree(out, ignore_errors=True)
     (out / "maps").mkdir(parents=True)
     shutil.copy(ROOT / "settings.cfg", out / "settings.cfg")
-    (out / "reset.cfg").write_text("".join(f'alias kt_go_{s} "echo kt: {s} not set on this map"\n' for s in names))
+    (out / "reset.cfg").write_text("".join(f'alias kt_go_{s} "echo kt: {s} not set on this map"\n' for s in names + ["ct_random", "t_random"]))
     for m, ss in spots.items():
         (out / "maps" / f"{m}.cfg").write_text(f"exec kt/reset\nalias kt_load \"map {m}\"\n" + "".join(
             f'alias kt_go_{s} "setpos {" ".join(map(num, v["pos"]))}; setang {" ".join(map(num, v["ang"]))}"\n'
-            for s, v in ss.items()))
+            for s, v in ss.items()) + shuffle(m, ss))
     (out / "init.cfg").write_text(
         'alias kt_noop ""\n'
         'alias kt_onload kt_noop\n'
         'alias kt_load "echo kt: kt_set_map_<map> first"\n'
+        'alias kt_clear "ent_fire smokegrenade_projectile kill; ent_fire molotov_projectile kill; ent_fire inferno kill; '
+        'ent_fire flashbang_projectile kill; ent_fire hegrenade_projectile kill; ent_fire decoy_projectile kill"\n'
         'alias kt_start "alias kt_onload kt_apply; game_type 0; game_mode 0; kt_load"\n'
         'alias kt_apply "exec kt/settings"\n'
         + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}"\n' for m in maps)
