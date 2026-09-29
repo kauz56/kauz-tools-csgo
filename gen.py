@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate cfg/kt/ from settings.cfg + data/{spawns,spots}/<map>.toml.
+"""Generate cfg/kt/ from settings.cfg + data/spawns/<map>.toml + data/routines/<name>.toml.
 
 ./gen.py         install into the local CS2 cfg dir
 ./gen.py --zip   build dist/kauz-tools-csgo.zip (Windows installer included)
@@ -14,18 +14,25 @@ NAME = "kauz-tools-csgo"
 HOOK = "// kauz-tools hook: runs kt_onload (no-op unless kt_start armed it)"
 # CS2 execs gamemode_<mode>_server.cfg last on every map load (see gamemodes.txt); kt_start forces casual
 MODES = ["casual"]
+EYE = 64  # routines use getpos coordinates (standing eye position); setpos sets the feet
 
 
 def num(x):
-    return f"{x:g}"
+    return f"{x:.10g}"
+
+
+def teleport(v, eye=0):
+    x, y, z = v["pos"]
+    return f'setpos {num(x)} {num(y)} {num(z - eye)}; setang {" ".join(map(num, v["ang"]))}'
 
 
 def load(name):
+    """spot -> setpos command"""
     spots = {}
-    for kind in ("spawns", "spots"):  # spots override spawns
+    for kind in ("spawns",):  # ("spawns", "spots"): custom spots disabled for now, would override spawns
         f = ROOT / "data" / kind / f"{name}.toml"
         if f.exists():
-            spots |= tomllib.loads(f.read_text())
+            spots |= {s: teleport(v) for s, v in tomllib.loads(f.read_text()).items()}
     return spots
 
 
@@ -45,9 +52,35 @@ def shuffle(m, ss, n=64):
     return out
 
 
+def routine(name, steps):
+    """kt_set_routine_<name>: step list with a map-load step whenever the map changes."""
+    seq, cur = [], None
+    for st in steps:
+        if st["map"] != cur:
+            cur = st["map"]
+            seq.append((cur, None, f"loading {cur}, kt_routine_next when ingame"))
+        seq.append((cur, teleport(st, EYE), st["title"]))
+    n, rs = len(seq), f"kt_rs_{name}_"
+    out = f'alias {rs}{n} "say routine done"\nalias {rs}-1 "say routine start"\n'
+    for i, (m, action, title) in enumerate(seq):
+        nxt, prev = i + 1, i - 1
+        if action is None:
+            action, prev = f"exec kt/maps/{m}; kt_launch", f"b{i + 1}" if i else -1
+        elif seq[i - 1][1] is None and i > 1:  # back across a map boundary: reload the previous map first
+            prev = f"b{i}"
+            out += (f'alias {rs}b{i} "exec kt/maps/{seq[i - 2][0]}; kt_launch; say loading {seq[i - 2][0]}, kt_routine_next when ingame; '
+                    f'alias kt_routine_next {rs}{i - 2}; alias kt_routine_prev {rs}{i - 2}"\n')
+        elif i == 1:
+            prev = -1
+        out += (f'alias {rs}{i} "{action}; say [{i + 1}/{n}] {title}; '
+                f'alias kt_routine_next {rs}{nxt}; alias kt_routine_prev {rs}{prev}"\n')
+    return out
+
+
 def build(cfg):
     """Write cfg/kt/ and return (maps, spot names)."""
-    maps = sorted({f.stem for f in (ROOT / "data").glob("*/*.toml")})
+    maps = sorted({f.stem for kind in ("spawns",) for f in (ROOT / "data" / kind).glob("*.toml")})  # + "spots"
+    routines = sorted((ROOT / "data" / "routines").glob("*.toml"))
     spots = {m: load(m) for m in maps}
     names = sorted({s for m in spots.values() for s in m})
     out = cfg / "kt"
@@ -58,17 +91,24 @@ def build(cfg):
     (out / "reset.cfg").write_text("".join(f'alias kt_go_{s} "echo kt: {s} not set on this map"\n' for s in names + ["ct_random", "t_random"]))
     for m, ss in spots.items():
         (out / "maps" / f"{m}.cfg").write_text(f"exec kt/reset\nalias kt_load \"map {m}\"\n" + "".join(
-            f'alias kt_go_{s} "setpos {" ".join(map(num, v["pos"]))}; setang {" ".join(map(num, v["ang"]))}"\n'
-            for s, v in ss.items()) + shuffle(m, ss))
+            f'alias kt_go_{s} "{v}"\n' for s, v in ss.items()) + shuffle(m, ss))
+    (out / "routines").mkdir()
+    for f in routines:
+        (out / "routines" / f"{f.stem}.cfg").write_text(routine(f.stem, tomllib.loads(f.read_text())["step"]))
     (out / "init.cfg").write_text(
         'alias kt_noop ""\n'
         'alias kt_onload kt_noop\n'
         'alias kt_load "echo kt: kt_set_map_<map> first"\n'
         'alias kt_clear "ent_fire smokegrenade_projectile kill; ent_fire molotov_projectile kill; ent_fire inferno kill; '
         'ent_fire flashbang_projectile kill; ent_fire hegrenade_projectile kill; ent_fire decoy_projectile kill"\n'
-        'alias kt_start "alias kt_onload kt_apply; game_type 0; game_mode 0; kt_load"\n'
+        # kt_set_* only set flags; kt_start runs kt_begin (plain map load or routine start)
+        'alias kt_launch "alias kt_onload kt_apply; game_type 0; game_mode 0; kt_load"\n'
+        'alias kt_begin kt_launch\n'
+        'alias kt_start kt_begin\n'
         'alias kt_apply "exec kt/settings"\n'
-        + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}"\n' for m in maps)
+        + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}; alias kt_begin kt_launch"\n' for m in maps)
+        + 'alias kt_routine_next "echo kt: kt_set_routine_<name> first"\nalias kt_routine_prev kt_routine_next\n'
+        + "".join(f'alias kt_set_routine_{f.stem} "exec kt/routines/{f.stem}; alias kt_begin kt_rs_{f.stem}_0"\n' for f in routines)
         + "exec kt/reset\n")
     return maps, names
 
@@ -91,10 +131,10 @@ def package():
     with tempfile.TemporaryDirectory() as tmp:
         pkg = Path(tmp) / NAME
         maps, names = build(pkg / "cfg")
-        for mode in MODES:  # templates; install.ps1 merges them into existing files
+        for mode in MODES:  # templates; install.bat merges them into existing files
             (pkg / "cfg" / f"gamemode_{mode}_server.cfg").write_text(f"{HOOK}\nkt_onload\n")
-        for f in ("install.bat", "install.ps1", "README.md"):
-            shutil.copy(ROOT / f if f == "README.md" else ROOT / "windows" / f, pkg / f)
+        shutil.copy(ROOT / "windows" / "install.bat", pkg)
+        shutil.copy(ROOT / "README.md", pkg)
         (ROOT / "dist").mkdir(exist_ok=True)
         zip_ = shutil.make_archive(ROOT / "dist" / NAME, "zip", tmp, NAME)
     print(f"{len(maps)} maps, {len(names)} spots -> {zip_}")

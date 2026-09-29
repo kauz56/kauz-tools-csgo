@@ -1,0 +1,89 @@
+[[step]]
+map = "de_ancient"
+title = "instant elbow smoke (CT spawn 1)"
+pos = [-192, 1696, 89.006165]
+ang = [0, -90, 0]
+
+[[step]]
+map = "de_ancient"
+title = "instant elbow smoke (CT spawn 2)"
+pos = [-256, 1728, 89.086945]
+ang = [0, -90, 0]
+
+[[step]]
+map = "de_ancient"
+title = "instant elbow smoke (CT spawn 3)"
+pos = [-352, 1728, 91.907043]
+ang = [0, -90, 0]
+
+[[step]]
+map = "de_ancient"
+title = "instant elbow smoke (CT spawn 4)"
+pos = [-448, 1728, 93.661591]
+ang = [0, -90, 0]
+
+[[step]]
+map = "de_ancient"
+title = "instant elbow smoke (CT spawn 5)"
+pos = [-512, 1696, 89.274704]
+ang = [0, -90, 0]
+
+[[step]]
+map = "de_ancient"
+title = "mid flash, elbow molly"
+pos = [-525.759155, 551.024841, 224.000443]
+ang = [3.366037, -88.929016, 0]
+
+[[step]]
+map = "de_ancient"
+title = "swing flash"
+pos = [-628.442383, -178.660767, 120.004616]
+ang = [-4.355973, 178.451202, 0]
+
+[[step]]
+map = "de_ancient"
+title = "ct halls smoke"
+pos = [-756.81134, -741.417603, 96.929901]
+ang = [0.61605, -138.128387, 0]
+
+[[step]]
+map = "de_ancient"
+title = "red smoke"
+pos = [-1188.536499, -1134.898071, 59.460468]
+ang = [-0.92391, 110.507843, 0]
+
+[[step]]
+map = "de_ancient"
+title = "donut smoke"
+pos = [-1149.591919, -1368.129639, 41.354858]
+ang = [2.552125, 153.090408, 0]
+
+[[step]]
+map = "de_ancient"
+title = "jump up molly"
+pos = [-1148.392334, -1006.766602, 92.352364]
+ang = [-2.441877, 31.988543, 0]
+
+[[step]]
+map = "de_ancient"
+title = "a flash"
+pos = [-1789.14856, -640.032043, 136]
+ang = [-0.637879, 90.697876, 0]
+
+[[step]]
+map = "de_nuke"
+title = "solo wall smokes"
+pos = [-1237.874634, -1064.6604, -352]
+ang = [2.551998, 164.276154, 0]
+
+[[step]]
+map = "de_nuke"
+title = "heaven smoke"
+pos = [-768.693237, -1120.634155, -351.296875]
+ang = [0.659989, -131.073822, 0]
+
+[[step]]
+map = "de_nuke"
+title = "fence stuff"
+pos = [-386.672241, -1642.100952, -352]
+ang = [2.068001, -82.695358, 0]

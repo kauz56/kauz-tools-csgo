@@ -30,6 +30,22 @@ grenade trajectory preview. Switch teams with the native team menu (`M`).
 
 Spawn numbering follows the map's entity order; maps with more than 5 spawns get more `kt_go_*` commands.
 
+## Routines
+
+`data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
+`kt_routine_next` / `kt_routine_prev`. Each step teleports you and posts its title in chat.
+Copy `pos`/`ang` from `getpos` while standing; `gen.py` subtracts the 64u eye height. When the map changes,
+a load step is inserted; press `kt_routine_next` again once you're ingame.
+
+```toml
+[[step]]
+map = "de_ancient"
+title = "red smoke"
+pos = [-1188.536499, -1134.898071, 59.460468]
+ang = [-0.92391, 110.507843, 0]
+```
+
+<!-- custom spots disabled for now
 ## Custom spots
 
 Add `data/spots/<map>.toml`, each table becomes a `kt_go_<name>` command (overrides spawns of the same name):
@@ -40,7 +56,8 @@ pos = [-300.0, -1500.0, -160.0]
 ang = [-20.0, 45.0, 0.0]
 ```
 
-Get the values ingame with `getpos`.
+`pos` is the feet position, as used by `setpos`.
+-->
 
 ## Development
 
