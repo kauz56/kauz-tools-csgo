@@ -52,6 +52,11 @@ def shuffle(m, ss, n=64):
     return out
 
 
+def launch(m):
+    # map name inline: an exec inside an alias runs after the rest of the line, so kt_load would still be stale
+    return f"exec kt/maps/{m}; alias kt_onload kt_apply; game_type 0; game_mode 0; map {m}"
+
+
 def routine(name, steps):
     """kt_set_routine_<name>: step list with a map-load step whenever the map changes."""
     seq, cur = [], None
@@ -65,15 +70,15 @@ def routine(name, steps):
     for i, (m, action, title) in enumerate(seq):
         nxt, prev = i + 1, i - 1
         if action is None:
-            action, prev = f"exec kt/maps/{m}; kt_launch", f"b{i + 1}" if i else -1
+            action, prev = launch(m), f"b{i + 1}" if i else -1
         elif seq[i - 1][1] is None and i > 1:  # back across a map boundary: reload the previous map first
             prev = f"b{i}"
-            out += (f'alias {rs}b{i} "exec kt/maps/{seq[i - 2][0]}; kt_launch; say loading {seq[i - 2][0]}, kt_routine_next when ingame; '
-                    f'alias kt_routine_next {rs}{i - 2}; alias kt_routine_prev {rs}{i - 2}"\n')
+            out += (f'alias {rs}b{i} "alias kt_routine_next {rs}{i - 2}; alias kt_routine_prev {rs}{i - 2}; '
+                    f'say loading {seq[i - 2][0]}, kt_routine_next when ingame; {launch(seq[i - 2][0])}"\n')
         elif i == 1:
             prev = -1
-        out += (f'alias {rs}{i} "{action}; say [{i + 1}/{n}] {title}; '
-                f'alias kt_routine_next {rs}{nxt}; alias kt_routine_prev {rs}{prev}"\n')
+        out += (f'alias {rs}{i} "alias kt_routine_next {rs}{nxt}; alias kt_routine_prev {rs}{prev}; '
+                f'say [{i + 1}/{n}] {title}; {action}"\n')  # action last: map changes may drop the rest
     return out
 
 
