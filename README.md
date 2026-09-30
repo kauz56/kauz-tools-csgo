@@ -33,8 +33,10 @@ Spawn numbering follows the map's entity order; maps with more than 5 spawns get
 ## Routines
 
 `data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
-`kt_routine_next` / `kt_routine_prev`. Each step teleports you and posts its title in chat.
-Copy `pos`/`ang` from `getpos` while standing; `gen.py` subtracts the 64u eye height. When the map changes,
+`kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step,
+`kt_dots` toggles red markers at the `dots` points of all steps on the current map). Each step teleports you and posts its title in chat.
+Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye height),
+or use `spawn = "ct_1"` for an exact map spawn. `lift = 20` raises the teleport if you get stuck in the floor. When the map changes,
 a load step is inserted; press `kt_routine_next` again once you're ingame.
 
 ```toml
@@ -43,6 +45,7 @@ map = "de_ancient"
 title = "red smoke"
 pos = [-1188.536499, -1134.898071, 59.460468]
 ang = [-0.92391, 110.507843, 0]
+dots = [[-911.27, -637.09, 102.27]]  # optional: world points to mark, e.g. where to aim
 ```
 
 <!-- custom spots disabled for now
