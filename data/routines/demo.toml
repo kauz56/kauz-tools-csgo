@@ -1,68 +1,57 @@
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 1)"
-spawn = "ct_1"
-help = [[-424, 1000.87, 441]]
+lineup = "ctinstant_1_mid"
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 2)"
-spawn = "ct_2"
-help = [[-477, 1000.87, 446]]
+lineup = "ctinstant_2_mid"
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 3)"
-spawn = "ct_3"
-help = [[-550, 1000.87, 441]]
+lineup = "ctinstant_3_mid"
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 4)"
-spawn = "ct_4"
-help = [[-614, 1000.87, 441]]
+lineup = "ctinstant_4_mid"
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 5)"
-spawn = "ct_5"
-help = [[-655.68, 1000.87, 449]]
+lineup = "ctinstant_5_mid"
 
 [[step]]
 map = "de_ancient"
-title = "mid flash, elbow molly"
-pos = [-525.759155, 551.024841, 224.000443]
-ang = [3.366037, -88.929016, 0]
-help = [[-360.71, -902.55, 188.07], [-1035.31, -869.2, 417.05]]  # flash, molly
+title = "mid flash"
+lineup = "elbow_flash"
+
+[[step]]
+map = "de_ancient"
+title = "elbow molly"
+lineup = "elbow_molly"
 
 [[step]]
 map = "de_ancient"
 title = "swing flash"
-pos = [-628.442383, -178.660767, 120.004616]
-ang = [-4.355973, 178.451202, 0]
-help = [[-1029.16, -166.37, 259]]
+lineup = "mid_swing_flash"
 
 [[step]]
 map = "de_ancient"
 title = "ct halls smoke"
-pos = [-756.81134, -741.417603, 96.929901]
-ang = [0.61605, -138.128387, 0]
-help = [[117.71, 521.8, 480]]
+lineup = "a_split_smoke"
 
 [[step]]
 map = "de_ancient"
 title = "red smoke"
-pos = [-1188.536499, -1134.898071, 59.460468]
-lift = 20  # stuck in the floor otherwise
-ang = [-0.92391, 110.507843, 0]
-help = [[-911.27, -637.09, 102.27]]
+lineup = "redroom_smoke4"
 
 [[step]]
 map = "de_ancient"
 title = "donut smoke"
-pos = [-1149.591919, -1368.129639, 41.354858]
-ang = [2.552125, 153.090408, 0]
-help = [[-1301.71, -286.35, 1070.71]]
+lineup = "deep_donut_smoke"
 
 [[step]]
 map = "de_ancient"
@@ -74,9 +63,7 @@ help = [[-1078.85, -963.33, 95.85]]  # not in the practice map: crosshair hit po
 [[step]]
 map = "de_ancient"
 title = "a flash"
-pos = [-1789.14856, -640.032043, 136]
-ang = [-0.637879, 90.697876, 0]
-help = [[-1793, -212.16, 388.79]]
+lineup = "a_rush_flash"
 
 [[step]]
 map = "de_nuke"

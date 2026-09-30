@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate cfg/kt/ from settings.cfg + data/spawns/<map>.toml + data/routines/<name>.toml.
+"""Generate cfg/kt/ from settings.cfg + data/spawns/<map>.toml + data/lineups/<map>.toml + data/routines/<name>.toml.
 
 ./gen.py         install into the local CS2 cfg dir
 ./gen.py --zip   build dist/kauz-tools-csgo.zip (Windows installer included)
@@ -72,6 +72,17 @@ def markers(points):
     return out + "ent_fire player FireUser1\n"
 
 
+def lineup(st, cache={}):
+    """step with its lineup (data/lineups/<map>.toml) filled in, the throw appended to the title"""
+    if "lineup" not in st:
+        return st
+    if st["map"] not in cache:
+        cache[st["map"]] = tomllib.loads((ROOT / "data/lineups" / f"{st['map']}.toml").read_text())
+    st = {"title": st["lineup"].replace("_", " "), "lift": 8} | cache[st["map"]][st["lineup"]] | st  # lift: pos is estimated
+    throw = ", ".join(t for t in ("crouch" * st.get("crouch", False), st.get("throw")) if t)
+    return st | {"title": st["title"] + f" ({throw})" * bool(throw)}
+
+
 def routine(name, steps):
     """kt_set_routine_<name>: step list with a map-load step whenever the map changes."""
     seq, cur = [], None
@@ -104,7 +115,7 @@ def routine(name, steps):
 def build(cfg):
     """Write cfg/kt/ and return (maps, spot names)."""
     maps = sorted({f.stem for kind in ("spawns",) for f in (ROOT / "data" / kind).glob("*.toml")})  # + "spots"
-    routines = {f.stem: tomllib.loads(f.read_text())["step"] for f in sorted((ROOT / "data" / "routines").glob("*.toml"))}
+    routines = {f.stem: [lineup(st) for st in tomllib.loads(f.read_text())["step"]] for f in sorted((ROOT / "data" / "routines").glob("*.toml"))}
     points = {}  # map -> {help point: size} of all routine steps on it
     for st in (st for steps in routines.values() for st in steps):
         x, y, z = st["pos"] if "pos" in st else tomllib.loads((ROOT / "data/spawns" / f"{st['map']}.toml").read_text())[st["spawn"]]["pos"]
@@ -126,6 +137,9 @@ def build(cfg):
             + (f'alias kt_help_draw "exec kt/help/{m}"\n' if m in points else ""))
         if m in points:
             (out / "help" / f"{m}.cfg").write_text(markers(points[m]))
+    # kt_spot: a grenade annotation holds stand position and view angles, a surface text the point looked at; spot.py reads the file
+    (out / "spot.cfg").write_text('annotation_clear\nannotation_create grenade smoke "kt"\nannotation_create text "kt" "" surface\n'
+                                  'annotation_save kt_spot\nannotation_clear\n')
     (out / "routines").mkdir()
     for name, steps in routines.items():
         (out / "routines" / f"{name}.cfg").write_text(routine(name, steps))
@@ -140,6 +154,7 @@ def build(cfg):
         'alias kt_begin kt_launch\n'
         'alias kt_start kt_begin\n'
         'alias kt_apply "exec kt/settings; alias kt_routine_help kt_help_on"\n'  # a map load removes the markers
+        'alias kt_spot "exec kt/spot"\n'
         + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}; alias kt_begin kt_launch"\n' for m in maps)
         + 'alias kt_routine_next "echo kt: kt_set_routine_<name> first"\nalias kt_routine_prev kt_routine_next\nalias kt_routine_repos kt_routine_next\n'
         # kt_routine_help toggles the markers of the current map

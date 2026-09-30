@@ -48,6 +48,23 @@ ang = [-0.92391, 110.507843, 0]
 help = [[-911.27, -637.09, 102.27]]  # optional: world points to mark, e.g. where to aim
 ```
 
+### Lineups
+
+A step can take its position from `data/lineups/<map>.toml` instead: `lineup = "redroom_smoke4"` fills in `pos`/`ang`/`help`
+and appends the throw to the title (`title` is optional then, keys set in the step win).
+
+```toml
+[redroom_smoke4]
+pos = [-1231.22, -1036.58, 75.33]
+ang = [-3.01, 51.31, 0]
+help = [[-911.27, -637.09, 102.27]]
+nade = "smoke"
+throw = "jumpthrow"
+```
+
+`./extract_lineups.py <workshop id or .vpk> <map>` generates that file from a practice workshop map (built like the Astralis utility maps).
+For your own spots, stand at the spot, look at the aim point and run `kt_spot` ingame, then `./spot.py <name>` prints the lineup.
+
 <!-- custom spots disabled for now
 ## Custom spots
 
@@ -68,6 +85,7 @@ ang = [-20.0, 45.0, 0.0]
 - `./gen.py --zip` — build `dist/kauz-tools-csgo.zip` (cfgs + Windows installer)
 - `./extract.py` — refresh `data/spawns/` from the map VPKs after map updates;
   needs [Source2Viewer-CLI](https://github.com/ValveResourceFormat/ValveResourceFormat/releases) in `.tools/s2v/`
+- `./extract_lineups.py`, `./spot.py` — see Lineups
 
 ## How it works
 
