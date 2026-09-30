@@ -14,6 +14,7 @@ NAME = "kauz-tools-csgo"
 HOOK = "// kauz-tools hook: runs kt_onload (no-op unless kt_start armed it)"
 # CS2 execs gamemode_<mode>_server.cfg last on every map load (see gamemodes.txt); kt_start forces casual
 MODES = ["casual"]
+SPOTS = 16  # kt_spot keeps this many recordings
 EYE = 64  # routines use getpos coordinates (standing eye position); setpos sets the feet
 # kt_routine_help markers: flat unlit world texts facing the player at the help points of a map
 HELP_KV = ('"message" "X" "color" "255 0 0" "font_name" "Arial" "font_size" "80" "fullbright" "1" "enabled" "1" '
@@ -139,8 +140,9 @@ def build(cfg):
         if m in points:
             (out / "help" / f"{m}.cfg").write_text(markers(points[m]))
     # kt_spot: a grenade annotation holds stand position and view angles, a surface text the point looked at; spot.py reads the file
-    (out / "spot.cfg").write_text('annotation_clear\nannotation_create grenade smoke "kt"\nannotation_create text "kt" "" surface\n'
-                                  'annotation_save kt_spot\nannotation_clear\n')
+    for i in range(SPOTS):  # rotating slots, spot.py picks them by age
+        (out / f"spot_{i}.cfg").write_text('annotation_clear\nannotation_create grenade smoke "kt"\nannotation_create text "kt" "" surface\n'
+                                           f'annotation_save kt_spot_{i}\nannotation_clear\n')
     (out / "routines").mkdir()
     for name, steps in routines.items():
         (out / "routines" / f"{name}.cfg").write_text(routine(name, steps))
@@ -155,7 +157,8 @@ def build(cfg):
         'alias kt_begin kt_launch\n'
         'alias kt_start kt_begin\n'
         'alias kt_apply "exec kt/settings; alias kt_routine_help kt_help_on"\n'  # a map load removes the markers
-        'alias kt_spot "exec kt/spot"\n'
+        'alias kt_spot kt_sp_0\n'
+        + "".join(f'alias kt_sp_{i} "exec kt/spot_{i}; alias kt_spot kt_sp_{(i + 1) % SPOTS}"\n' for i in range(SPOTS))
         + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}; alias kt_begin kt_launch"\n' for m in maps)
         + 'alias kt_routine_next "echo kt: kt_set_routine_<name> first"\nalias kt_routine_prev kt_routine_next\nalias kt_routine_repos kt_routine_next\n'
         # kt_routine_help toggles the markers of the current map

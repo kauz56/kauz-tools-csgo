@@ -68,20 +68,54 @@ lineup = "a_rush_flash"
 [[step]]
 map = "de_nuke"
 title = "solo wall smokes"
-pos = [-1237.874634, -1064.6604, -352]
-ang = [2.551998, 164.276154, 0]
-help = [[-1478.28, -996.98, -363.13]]
+lineup = "solowall"
 
 [[step]]
 map = "de_nuke"
 title = "heaven smoke"
-pos = [-768.693237, -1120.634155, -351.296875]
-ang = [0.659989, -131.073822, 0]
-help = [[-932.94, -1309.09, -354.18]]
+lineup = "outside_heaven"
 
 [[step]]
 map = "de_nuke"
-title = "fence stuff"
-pos = [-386.672241, -1642.100952, -352]
-ang = [2.068001, -82.695358, 0]
-help = [[-354.91, -1889.91, -361.02]]
+title = "fence: behind red molly"
+lineup = "behind_red_molly"
+
+[[step]]
+map = "de_nuke"
+title = "fence: garage smoke"
+lineup = "garage_smoke"
+
+[[step]]
+map = "de_nuke"
+title = "fence: cross smoke"
+lineup = "cross"
+
+[[step]]
+map = "de_nuke"
+title = "ratpit molly"
+lineup = "ratpit_molly"
+
+[[step]]
+map = "de_nuke"
+title = "g-spot smoke"
+lineup = "gspot_smoke"
+
+[[step]]
+map = "de_nuke"
+title = "red smoke"
+lineup = "red_smoke"
+
+[[step]]
+map = "de_nuke"
+title = "door lurk smoke"
+lineup = "door_lurk_smoke2"
+
+[[step]]
+map = "de_nuke"
+title = "ramp entry flash"
+lineup = "ramp_flash"
+
+[[step]]
+map = "de_nuke"
+title = "a entry flash"
+lineup = "a_entry_flash2"

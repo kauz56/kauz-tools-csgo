@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Print the spot saved by kt_spot (where you stood and what you looked at) as a lineup for data/lineups/<map>.toml.
+"""Print a spot saved by kt_spot (where you stood and what you looked at) as a lineup for data/lineups/<map>.toml.
 
-./spot.py [name]
+./spot.py [name] [n]    n = 1 for the latest recording (default), 2 for the one before, ...
 """
 import re, sys
 
@@ -10,8 +10,9 @@ from extract import CS2
 EYE = 64  # pos is the standing eye position, like getpos
 
 
-def main(name="spot"):
-    text = (CS2 / "game/csgo/annotations/local/kt_spot/kt_spot.txt").read_text()
+def main(name="spot", n="1"):
+    files = sorted((CS2 / "game/csgo/annotations/local").glob("kt_spot*/kt_spot*.txt"), key=lambda f: f.stat().st_mtime, reverse=True)
+    text = files[int(n) - 1].read_text()
     nodes = {}  # (type, subtype) -> {Position, Angles}
     for block in re.split(r"MapAnnotationNode\d+ =", text)[1:]:
         node = dict(re.findall(r"^\t\t(\w+) = (.+)$", block, flags=re.M))
@@ -25,4 +26,4 @@ def main(name="spot"):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:2])
+    main(*sys.argv[1:3])
