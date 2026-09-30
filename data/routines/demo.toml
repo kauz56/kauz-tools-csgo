@@ -2,52 +2,52 @@
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 1)"
 spawn = "ct_1"
-dots = [[-424, 1000.87, 441]]
+help = [[-424, 1000.87, 441]]
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 2)"
 spawn = "ct_2"
-dots = [[-477, 1000.87, 446]]
+help = [[-477, 1000.87, 446]]
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 3)"
 spawn = "ct_3"
-dots = [[-550, 1000.87, 441]]
+help = [[-550, 1000.87, 441]]
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 4)"
 spawn = "ct_4"
-dots = [[-614, 1000.87, 441]]
+help = [[-614, 1000.87, 441]]
 
 [[step]]
 map = "de_ancient"
 title = "instant elbow smoke (CT spawn 5)"
 spawn = "ct_5"
-dots = [[-655.68, 1000.87, 449]]
+help = [[-655.68, 1000.87, 449]]
 
 [[step]]
 map = "de_ancient"
 title = "mid flash, elbow molly"
 pos = [-525.759155, 551.024841, 224.000443]
 ang = [3.366037, -88.929016, 0]
-dots = [[-360.71, -902.55, 188.07], [-1035.31, -869.2, 417.05]]  # flash, molly
+help = [[-360.71, -902.55, 188.07], [-1035.31, -869.2, 417.05]]  # flash, molly
 
 [[step]]
 map = "de_ancient"
 title = "swing flash"
 pos = [-628.442383, -178.660767, 120.004616]
 ang = [-4.355973, 178.451202, 0]
-dots = [[-1029.16, -166.37, 259]]
+help = [[-1029.16, -166.37, 259]]
 
 [[step]]
 map = "de_ancient"
 title = "ct halls smoke"
 pos = [-756.81134, -741.417603, 96.929901]
 ang = [0.61605, -138.128387, 0]
-dots = [[117.71, 521.8, 480]]
+help = [[117.71, 521.8, 480]]
 
 [[step]]
 map = "de_ancient"
@@ -55,46 +55,46 @@ title = "red smoke"
 pos = [-1188.536499, -1134.898071, 59.460468]
 lift = 20  # stuck in the floor otherwise
 ang = [-0.92391, 110.507843, 0]
-dots = [[-911.27, -637.09, 102.27]]
+help = [[-911.27, -637.09, 102.27]]
 
 [[step]]
 map = "de_ancient"
 title = "donut smoke"
 pos = [-1149.591919, -1368.129639, 41.354858]
 ang = [2.552125, 153.090408, 0]
-dots = [[-1301.71, -286.35, 1070.71]]
+help = [[-1301.71, -286.35, 1070.71]]
 
 [[step]]
 map = "de_ancient"
 title = "jump up molly"
 pos = [-1148.392334, -1006.766602, 92.352364]
 ang = [-2.441877, 31.988543, 0]
-dots = [[-1078.85, -963.33, 95.85]]  # not in the practice map: crosshair hit point
+help = [[-1078.85, -963.33, 95.85]]  # not in the practice map: crosshair hit point
 
 [[step]]
 map = "de_ancient"
 title = "a flash"
 pos = [-1789.14856, -640.032043, 136]
 ang = [-0.637879, 90.697876, 0]
-dots = [[-1793, -212.16, 388.79]]
+help = [[-1793, -212.16, 388.79]]
 
 [[step]]
 map = "de_nuke"
 title = "solo wall smokes"
 pos = [-1237.874634, -1064.6604, -352]
 ang = [2.551998, 164.276154, 0]
-dots = [[-1478.28, -996.98, -363.13]]
+help = [[-1478.28, -996.98, -363.13]]
 
 [[step]]
 map = "de_nuke"
 title = "heaven smoke"
 pos = [-768.693237, -1120.634155, -351.296875]
 ang = [0.659989, -131.073822, 0]
-dots = [[-932.94, -1309.09, -354.18]]
+help = [[-932.94, -1309.09, -354.18]]
 
 [[step]]
 map = "de_nuke"
 title = "fence stuff"
 pos = [-386.672241, -1642.100952, -352]
 ang = [2.068001, -82.695358, 0]
-dots = [[-354.91, -1889.91, -361.02]]
+help = [[-354.91, -1889.91, -361.02]]
