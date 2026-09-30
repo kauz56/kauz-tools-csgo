@@ -56,9 +56,9 @@ lineup = "deep_donut_smoke"
 [[step]]
 map = "de_ancient"
 title = "jump up molly"
-pos = [-1148.392334, -1006.766602, 92.352364]
-ang = [-2.441877, 31.988543, 0]
-help = [[-1078.85, -963.33, 95.85]]  # not in the practice map: crosshair hit point
+pos = [-1145.91, -813.19, 102.57]
+ang = [-14.83, 10.15, 0]
+help = [[-245.14, -651.99, 342.38]]
 
 [[step]]
 map = "de_ancient"

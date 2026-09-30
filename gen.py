@@ -27,7 +27,8 @@ def num(x):
 
 def teleport(v, eye=0):
     x, y, z = v["pos"]
-    return f'setpos {num(x)} {num(y)} {num(z - eye)}; setang {" ".join(map(num, v["ang"]))}'
+    # noclip off moves a stuck player into free space
+    return f'setpos {num(x)} {num(y)} {num(z - eye)}; setang {" ".join(map(num, v["ang"]))}; noclip; noclip'
 
 
 def load(name):
@@ -78,7 +79,7 @@ def lineup(st, cache={}):
         return st
     if st["map"] not in cache:
         cache[st["map"]] = tomllib.loads((ROOT / "data/lineups" / f"{st['map']}.toml").read_text())
-    st = {"title": st["lineup"].replace("_", " "), "lift": 8} | cache[st["map"]][st["lineup"]] | st  # lift: pos is estimated
+    st = {"title": st["lineup"].replace("_", " ")} | cache[st["map"]][st["lineup"]] | st
     throw = ", ".join(t for t in ("crouch" * st.get("crouch", False), st.get("throw")) if t)
     return st | {"title": st["title"] + f" ({throw})" * bool(throw)}
 
