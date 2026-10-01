@@ -22,6 +22,7 @@ kt_start               load it with practice settings
 kt_go_ct_1             teleport to CT spawn 1 (kt_go_t_1 for T)
 kt_go_ct_random        teleport to a random CT spawn (kt_go_t_random for T)
 kt_clear               remove all grenades, smokes and fires
+kt_help                list all commands, maps and routines
 ```
 
 Practice settings (`settings.cfg`): cheats on, no bots, endless round, no freezetime/warmup,

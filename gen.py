@@ -20,6 +20,7 @@ EYE = 64  # routines use getpos coordinates (standing eye position); setpos sets
 HELP_KV = ('"message" "X" "color" "255 0 0" "font_name" "Arial" "font_size" "80" "fullbright" "1" "enabled" "1" '
           '"reorient_mode" "1" "angles" "0 0 90" "justify_horizontal" "1" "justify_vertical" "1"')  # roll 90: upright
 HELP_SCALE = 0.0002  # world_units_per_pixel per unit of distance to the step's position: same apparent size for far markers
+HELP_PULL = 0.012  # markers move this fraction of the distance along the line of sight towards the step's position
 
 
 def num(x):
@@ -67,7 +68,7 @@ def markers(points):
     """kt_help_draw: ent_create honors origin but then drops the entity to the floor, and ent_fire only finds
     entities that already exist, so a delayed player output moves each marker to its point."""
     out = "ent_fire kt_help* kill\n"
-    for j, (pt, scale) in enumerate(points.items()):
+    for j, (pt, scale) in enumerate(points.values()):
         p = " ".join(map(num, pt))
         out += f'ent_create point_worldtext {{"targetname" "kt_help{j}" "origin" "{p}" "world_units_per_pixel" "{scale:.2g}" {HELP_KV}}}\n' + "".join(
             f'ent_fire player AddOutput "OnUser1>kt_help{j}>SetAbsOrigin>{p}>{d}>1"\n' for d in (0.2, 1.5))  # 1.5: slow spawn
@@ -81,7 +82,7 @@ def lineup(st, cache={}):
     if st["map"] not in cache:
         cache[st["map"]] = tomllib.loads((ROOT / "data/lineups" / f"{st['map']}.toml").read_text())
     st = {"title": st["lineup"].replace("_", " ")} | cache[st["map"]][st["lineup"]] | st
-    throw = ", ".join(t for t in ("crouch" * st.get("crouch", False), st.get("throw")) if t)
+    throw = ", ".join(t for t in ("crouch" * (st.get("crouch", False) and "crouch" not in st.get("throw", "")), st.get("throw")) if t)
     return st | {"title": st["title"] + f" ({throw})" * bool(throw)}
 
 
@@ -126,11 +127,19 @@ def build(cfg):
     """Write cfg/kt/ and return (maps, spot names)."""
     maps = sorted({f.stem for kind in ("spawns",) for f in (ROOT / "data" / kind).glob("*.toml")})  # + "spots"
     routines = {f.stem: [lineup(st) for st in expand(f.stem)] for f in sorted((ROOT / "data" / "routines").glob("*.toml"))}
-    points = {}  # map -> {help point: size} of all routine steps on it
+    points = {}  # map -> {help point: (marker position, size)} of all routine steps on it
     for st in (st for steps in routines.values() for st in steps):
-        x, y, z = st["pos"] if "pos" in st else tomllib.loads((ROOT / "data/spawns" / f"{st['map']}.toml").read_text())[st["spawn"]]["pos"]
+        if "pos" in st:
+            eye = st["pos"]
+        else:
+            x, y, z = tomllib.loads((ROOT / "data/spawns" / f"{st['map']}.toml").read_text())[st["spawn"]]["pos"]
+            eye = (x, y, z + EYE)
         for pt in st.get("help", []):
-            points.setdefault(st["map"], {}).setdefault(tuple(pt), max(0.01, HELP_SCALE * math.dist(pt, (x, y, z))))
+            dist = math.dist(pt, eye)
+            # help points sit on surfaces: pull the marker a bit towards the player so the wall doesn't swallow it
+            k = min(0.5, max(4, HELP_PULL * dist) / dist) if dist else 0
+            at = tuple(round(p + (e - p) * k, 2) for p, e in zip(pt, eye))
+            points.setdefault(st["map"], {}).setdefault(tuple(pt), (at, max(0.01, HELP_SCALE * dist)))
     spots = {m: load(m) for m in maps}
     names = sorted({s for m in spots.values() for s in m})
     out = cfg / "kt"
@@ -154,7 +163,22 @@ def build(cfg):
     (out / "routines").mkdir()
     for name, steps in routines.items():
         (out / "routines" / f"{name}.cfg").write_text(routine(name, steps))
+    usage = [
+        "kauz-tools commands",
+        "  kt_set_map_<map>        pick a map, then kt_start",
+        "  kt_set_routine_<name>   pick a routine, then kt_start",
+        "  kt_start                load the map with practice settings",
+        "  kt_go_ct_<n>, kt_go_t_<n>, kt_go_ct_random, kt_go_t_random   teleport to a spawn",
+        "  kt_clear                remove all grenades, smokes and fires",
+        "  kt_routine_next / kt_routine_prev / kt_routine_repos   step through a routine",
+        "  kt_routine_help         toggle aim markers",
+        "  kt_spot                 record stand position and aim point (read with spot.py)",
+        "maps: " + " ".join(maps),
+        "routines: " + " ".join(routines),
+    ]
+    (out / "usage.cfg").write_text("".join(f'echo "{line}"\n' for line in usage))
     (out / "init.cfg").write_text(
+        'alias kt_help "exec kt/usage"\n'
         'alias kt_noop ""\n'
         'alias kt_onload kt_noop\n'
         'alias kt_load "echo kt: kt_set_map_<map> first"\n'

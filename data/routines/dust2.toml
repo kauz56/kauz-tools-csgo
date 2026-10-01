@@ -1,0 +1,79 @@
+[[step]]
+map = "de_dust2"
+title = "long corner smoke"
+lineup = "long_corner_smoke2"
+
+[[step]]
+map = "de_dust2"
+title = "long flash"
+lineup = "long_flash"
+
+[[step]]
+map = "de_dust2"
+title = "xbox smoke"
+lineup = "xbox_smoke2"
+
+[[step]]
+map = "de_dust2"
+title = "double doors smoke from mid [double_door_smoke]"
+lineup = "double_door_smoke"
+
+[[step]]
+map = "de_dust2"
+title = "double doors smoke from mid [double_door_smoke2]"
+lineup = "double_door_smoke2"
+
+[[step]]
+map = "de_dust2"
+title = "ct cross smoke"
+lineup = "ct_cross_smoke3"
+
+[[step]]
+map = "de_dust2"
+title = "b double doors from short"
+lineup = "short_b_doors_smoke"
+
+[[step]]
+map = "de_dust2"
+title = "ct smoke from short"
+lineup = "short_ct_smoke"
+
+[[step]]
+map = "de_dust2"
+title = "site molly from short"
+lineup = "a_site_molly"
+
+[[step]]
+map = "de_dust2"
+title = "popflash long [long_popflash2]"
+lineup = "long_popflash2"
+
+[[step]]
+map = "de_dust2"
+title = "popflash long [long_popflash3]"
+lineup = "long_popflash3"
+
+[[step]]
+map = "de_dust2"
+title = "corner flash long"
+lineup = "long_corner_flash"
+
+[[step]]
+map = "de_dust2"
+title = "ct cross from double doors"
+lineup = "ct_cross_smoke"
+
+[[step]]
+map = "de_dust2"
+title = "b door and window smoke"
+lineup = "b_door_window_targets"
+
+[[step]]
+map = "de_dust2"
+title = "b entry flash 1"
+lineup = "b_entry_flash"
+
+[[step]]
+map = "de_dust2"
+title = "b entry flash 2"
+lineup = "b_entry_flash2"
