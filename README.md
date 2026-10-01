@@ -39,6 +39,9 @@ Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye he
 or use `spawn = "ct_1"` for an exact map spawn. `lift = 20` raises the teleport if you get stuck in the floor. When the map changes,
 a load step is inserted; press `kt_routine_next` again once you're ingame.
 
+Composite routines chain others: `data/routines/all.toml` is just `include = ["ancient", "nuke", "mirage"]`
+(steps of its own come after the included ones).
+
 ```toml
 [[step]]
 map = "de_ancient"

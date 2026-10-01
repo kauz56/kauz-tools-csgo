@@ -85,6 +85,14 @@ def lineup(st, cache={}):
     return st | {"title": st["title"] + f" ({throw})" * bool(throw)}
 
 
+def expand(name, seen=()):
+    """steps of a routine; include = ["a", "b"] puts the steps of those routines first (composite routines)"""
+    if name in seen:
+        sys.exit(f"routine include loop: {' -> '.join(seen + (name,))}")
+    data = tomllib.loads((ROOT / "data/routines" / f"{name}.toml").read_text())
+    return [st for inc in data.get("include", []) for st in expand(inc, seen + (name,))] + data.get("step", [])
+
+
 def routine(name, steps):
     """kt_set_routine_<name>: step list with a map-load step whenever the map changes."""
     seq, cur = [], None
@@ -117,7 +125,7 @@ def routine(name, steps):
 def build(cfg):
     """Write cfg/kt/ and return (maps, spot names)."""
     maps = sorted({f.stem for kind in ("spawns",) for f in (ROOT / "data" / kind).glob("*.toml")})  # + "spots"
-    routines = {f.stem: [lineup(st) for st in tomllib.loads(f.read_text())["step"]] for f in sorted((ROOT / "data" / "routines").glob("*.toml"))}
+    routines = {f.stem: [lineup(st) for st in expand(f.stem)] for f in sorted((ROOT / "data" / "routines").glob("*.toml"))}
     points = {}  # map -> {help point: size} of all routine steps on it
     for st in (st for steps in routines.values() for st in steps):
         x, y, z = st["pos"] if "pos" in st else tomllib.loads((ROOT / "data/spawns" / f"{st['map']}.toml").read_text())[st["spawn"]]["pos"]

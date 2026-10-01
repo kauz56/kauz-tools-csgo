@@ -1,0 +1,79 @@
+[[step]]
+map = "de_anubis"
+title = "temple smoke mid"
+lineup = "tstart_temple_smoke"
+
+[[step]]
+map = "de_anubis"
+title = "mid pop [tstart_mid_popflash]"
+lineup = "tstart_mid_popflash"
+
+[[step]]
+map = "de_anubis"
+title = "mid pop [mid_popflash3]"
+lineup = "mid_popflash3"
+
+[[step]]
+map = "de_anubis"
+title = "mid pop [water_popflash]"
+lineup = "water_popflash"
+
+[[step]]
+map = "de_anubis"
+title = "mid molly [tstart_mid_molly]"
+lineup = "tstart_mid_molly"
+
+[[step]]
+map = "de_anubis"
+title = "mid molly [tstart_mid_molly2]"
+lineup = "tstart_mid_molly2"
+
+[[step]]
+map = "de_anubis"
+title = "pillar molly"
+lineup = "b_side_pillar_molly"
+
+[[step]]
+map = "de_anubis"
+title = "b entry flash [b_entry_flash]"
+lineup = "b_entry_flash"
+
+[[step]]
+map = "de_anubis"
+title = "b entry flash [b_entry_flash2]"
+lineup = "b_entry_flash2"
+
+[[step]]
+map = "de_anubis"
+title = "mid/cave smoke"
+lineup = "cave_mid_smoke"
+
+[[step]]
+map = "de_anubis"
+title = "a main flash upper [a_main_flash]"
+lineup = "a_main_flash"
+
+[[step]]
+map = "de_anubis"
+title = "a main flash upper [a_main_popflash]"
+lineup = "a_main_popflash"
+
+[[step]]
+map = "de_anubis"
+title = "temple smoke upper"
+lineup = "temple_smoke2"
+
+[[step]]
+map = "de_anubis"
+title = "camera smoke upper [camera_smoke]"
+lineup = "camera_smoke"
+
+[[step]]
+map = "de_anubis"
+title = "camera smoke upper [camera_smoke2]"
+lineup = "camera_smoke2"
+
+[[step]]
+map = "de_anubis"
+title = "a main smoke from a site"
+lineup = "a_site_a_main_smoke"

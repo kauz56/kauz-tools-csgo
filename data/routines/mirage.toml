@@ -1,0 +1,59 @@
+[[step]]
+map = "de_mirage"
+title = "window smoke"
+lineup = "window_regular"
+
+[[step]]
+map = "de_mirage"
+title = "conn smoke"
+lineup = "tspawn_connector"
+
+[[step]]
+map = "de_mirage"
+title = "top mid smoke"
+lineup = "tspawn_topmid"
+
+[[step]]
+map = "de_mirage"
+title = "short smoke"
+lineup = "tspawn_short"
+
+[[step]]
+map = "de_mirage"
+title = "ct spawn smoke"
+lineup = "a-site_ctspawn"
+
+[[step]]
+map = "de_mirage"
+title = "lamp flash"
+lineup = "a-site_lampflash"
+
+[[step]]
+map = "de_mirage"
+title = "entry flash"
+lineup = "b-site_entry_flash"
+
+[[step]]
+map = "de_mirage"
+title = "rush flash"
+lineup = "b-aps_flash"
+
+[[step]]
+map = "de_mirage"
+title = "jail molly"
+lineup = "bench_molly"
+
+[[step]]
+map = "de_mirage"
+title = "palace smoke"
+lineup = "palace_smoke"
+
+[[step]]
+map = "de_mirage"
+title = "palace smoke (outside market)"
+lineup = "ctspawn_palace"
+
+[[step]]
+map = "de_mirage"
+title = "molly site"
+lineup = "site_molly"

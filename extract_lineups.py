@@ -63,7 +63,8 @@ def main(src, map_):
         targets = [e for e in props if e.get("targetname") in on]
         if trig.get("classname") != "trigger_multiple" or not targets:
             continue
-        name = re.sub(r"^\[.*?\]|_target$", "", targets[0]["targetname"])
+        name = re.sub(r"^\[.*?\]|_(target|particle)$", "", targets[0]["targetname"])
+        name = re.sub(r"[^\w-]", "_", name)  # bare TOML key
         if name in seen:
             continue
         seen.add(name)
