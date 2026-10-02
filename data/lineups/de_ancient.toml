@@ -19,15 +19,15 @@ nade = "smoke"
 throw = "wjumpthrow"
 
 [tinstant_4_mid]
-pos = [-387.50, -2289.50, -78.00]
-ang = [-24.59, 101.06, 0]
+pos = [-387.50, -2289.50, -99.30]
+ang = [-29.70, 101.06, 0]
 help = [[-423.76, -2104.00, 8.50], [-462.51, -2104.00, 8.50]]
 nade = "smoke"
 throw = "wjumpthrow nextdot"
 
 [tinstant_5_mid]
-pos = [-306.50, -2289.50, -78.00]
-ang = [-28.83, 97.48, 0]
+pos = [-306.50, -2289.50, -99.30]
+ang = [-31.57, 97.48, 0]
 help = [[-349.78, -1960.00, 104.94]]
 nade = "smoke"
 throw = "wjumpthrow"
@@ -123,43 +123,45 @@ nade = "smoke"
 throw = "shiftwalk jumpthrow line"
 
 [default_cave_smoke]
-pos = [-687.00, -2471.00, -93.05]
-ang = [-27.96, 63.02, 0]
+pos = [-686.12, -2466.59, -92.98]
+ang = [-28.06, 62.96, 0]
+lift = 4
 help = [[-210.77, -1535.36, 464.26]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [a_site_ct_smoke]
-pos = [-1112.22, -1430.58, 42.18]
-ang = [-36.72, 88.81, 0]
+pos = [-1115.72, -1430.58, 42.06]
+ang = [-36.72, 88.60, 0]
 help = [[-1092.61, -487.23, 746.00]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [b_lurk_smoke]
-pos = [-397.22, -2037.58, -91.70]
-ang = [-41.25, 54.82, 0]
+pos = [-390.72, -2037.58, -90.60]
+ang = [-41.43, 55.57, 0]
 help = [[-161.85, -1703.70, 266.60]]
 nade = "smoke"
 throw = "wjumpthrow"
 
 [default_donut]
-pos = [-1939.22, -872.58, 43.53]
-ang = [-33.04, 75.78, 0]
+pos = [-1939.22, -872.58, 46.01]
+ang = [-32.74, 75.78, 0]
+lift = 4
 help = [[-1857.60, -550.38, 259.73]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [lane_long_smoke]
-pos = [507.78, -908.58, 190.26]
-ang = [-18.42, 66.29, 0]
+pos = [502.48, -903.28, 191.72]
+ang = [-18.27, 64.36, 0]
 help = [[592.00, -716.81, 260.00]]
 nade = "smoke"
 throw = "regular throw"
 
 [default_redroom_smoke]
-pos = [-395.22, -2103.58, -91.62]
-ang = [-28.16, 92.72, 0]
+pos = [-390.72, -2103.58, -90.91]
+ang = [-28.11, 93.05, 0]
 help = [[-432.00, -1329.79, 323.00]]
 nade = "smoke"
 throw = "jumpthrow"
@@ -172,93 +174,96 @@ nade = "smoke"
 throw = "jumpthrow"
 
 [redroom_smoke4]
-pos = [-1231.22, -1036.58, 75.33]
-ang = [-3.01, 51.31, 0]
+pos = [-1231.22, -1045.08, 73.90]
+ang = [-3.13, 51.90, 0]
 help = [[-911.27, -637.09, 102.27]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [donut_smoke]
-pos = [-740.00, -2141.44, -104.87]
-ang = [-26.98, 93.37, 0]
+pos = [-733.99, -2135.43, -103.77]
+ang = [-27.07, 93.82, 0]
 help = [[-788.12, -1324.48, 311.68]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [default_redroom_smoke2]
-pos = [-628.25, -2090.58, -91.00]
-ang = [-26.37, 87.38, 0]
+pos = [-632.75, -2090.58, -90.71]
+ang = [-26.35, 87.04, 0]
 help = [[-593.00, -1321.00, 291.00]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [donut_smoke2]
-pos = [-628.25, -2063.58, -91.00]
-ang = [-24.91, 96.69, 0]
+pos = [-632.75, -2063.58, -91.08]
+ang = [-24.93, 96.35, 0]
 help = [[-716.42, -1311.53, 260.72]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [donut_main]
 crouch = true
-pos = [-2145.22, -1008.58, 49.91]
-ang = [-26.91, 61.16, 0]
+pos = [-2136.38, -999.74, 50.19]
+ang = [-27.49, 61.59, 0]
+lift = 4
 help = [[-1917.59, -595.27, 289.45]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [deep_donut_smoke]
-pos = [-1241.22, -1318.58, 42.45]
-ang = [-44.84, 93.35, 0]
+pos = [-1234.72, -1318.58, 43.40]
+ang = [-44.80, 93.71, 0]
 help = [[-1301.71, -286.35, 1070.71]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [a_main_ct_smoke]
-pos = [-1977.00, 323.42, 149.00]
-ang = [-13.02, 40.00, 0]
+pos = [-1985.50, 323.42, 152.00]
+ang = [-12.78, 39.69, 0]
 help = [[-1202.00, 973.70, 383.00]]
 nade = "smoke"
 throw = "regular throw"
 
 [donut_ct_smoke]
-pos = [-996.00, -242.00, 154.00]
-ang = [-37.29, 90.52, 0]
+pos = [-976.50, -242.00, 157.80]
+ang = [-36.52, 95.60, 0]
 help = [[-998.00, -22.70, 321.00]]
 nade = "smoke"
 throw = "regular throw"
 
 [t_stairs_cave_smoke]
-pos = [769.00, -1633.00, 2.67]
-ang = [-28.10, 103.55, 0]
+pos = [759.30, -1637.02, -8.45]
+ang = [-29.34, 101.91, 0]
+lift = 12
 help = [[684.59, -1282.85, 195.00]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [box_long_smoke]
-pos = [1100.50, -1379.83, 65.00]
-ang = [-4.76, 82.60, 0]
+pos = [1093.43, -1384.55, 65.41]
+ang = [-4.65, 81.74, 0]
 help = [[1154.72, -962.18, 100.09]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [long_and_short_smoke]
-pos = [1258.78, -1485.00, 82.07]
-ang = [-3.66, 88.52, 0]
+pos = [1239.69, -1465.91, 77.35]
+ang = [-4.43, 85.96, 0]
+lift = 12
 help = [[1270.54, -1029.25, 111.25], [1102.56, -1032.96, 170.30]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [ctspawn_b_doors_smoke]
-pos = [-286.22, 1777.42, 91.54]
-ang = [-21.77, -49.95, 0]
+pos = [-286.22, 1770.92, 90.92]
+ang = [-21.86, -49.77, 0]
 help = [[567.38, 761.93, 621.27]]
 nade = "smoke"
 throw = "run jumpthrow"
 
 [a_site_molly]
-pos = [-2109.22, 287.35, 149.00]
-ang = [-9.23, 41.01, 0]
+pos = [-2102.72, 287.35, 152.00]
+ang = [-9.11, 41.24, 0]
 help = [[-1329.11, 965.61, 316.99]]
 nade = "molotov"
 throw = "run throw"
@@ -271,57 +276,57 @@ nade = "molotov"
 throw = "jumpthrow"
 
 [doors_short_smoke]
-pos = [1051.91, -938.66, 67.50]
-ang = [-34.26, 107.87, 0]
+pos = [1059.27, -937.20, 67.51]
+ang = [-34.18, 109.24, 0]
 help = [[956.49, -642.76, 279.26]]
 nade = "smoke"
 throw = "regular throw"
 
 [ct_a_main_smoke]
-pos = [-60.22, 1289.42, 95.94]
-ang = [-17.41, -155.07, 0]
+pos = [-67.15, 1292.29, 94.83]
+ang = [-17.63, -154.59, 0]
 help = [[-662.79, 1009.32, 304.35]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [cave_pop_flash]
-pos = [1037.00, -885.00, 72.05]
-ang = [-21.79, 172.36, 0]
+pos = [1049.47, -879.83, 71.12]
+ang = [-21.69, 172.59, 0]
 help = [[-689.81, -653.49, 768.66]]
 nade = "flash"
 throw = "regular throw"
 
 [doors_long_smoke]
-pos = [1159.78, -928.58, 67.50]
-ang = [-8.75, 70.57, 0]
+pos = [1159.78, -918.08, 70.06]
+ang = [-8.65, 70.22, 0]
 help = [[1356.16, -371.91, 158.36]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [b_retake_smoke]
-pos = [998.96, 975.00, 165.81]
-ang = [-6.83, -75.65, 0]
+pos = [1004.97, 968.99, 164.98]
+ang = [-7.22, -76.66, 0]
 help = [[1061.93, 728.82, 196.26], [885.71, 730.11, 177.68]]
 nade = "smoke"
 throw = "left right jumpthrow"
 
 [b_ramp_flash]
-pos = [1336.18, 507.22, 193.58]
-ang = [7.42, -93.91, 0]
+pos = [1336.18, 516.72, 194.67]
+ang = [7.40, -93.79, 0]
 help = [[1316.40, 218.21, 155.84]]
 nade = "flash"
 throw = "left right jumpthrow"
 
 [cave_popflash2]
-pos = [333.78, -732.58, 249.89]
-ang = [-14.48, -97.26, 0]
+pos = [338.38, -737.18, 250.00]
+ang = [-14.72, -98.70, 0]
 help = [[307.41, -939.63, 303.80]]
 nade = "flash"
 throw = "regular throw"
 
 [b_ramp_molly]
-pos = [576.78, 775.42, 179.09]
-ang = [7.19, -60.58, 0]
+pos = [576.78, 782.92, 178.98]
+ang = [7.05, -61.17, 0]
 help = [[751.99, 464.66, 134.07]]
 nade = "molotov"
 throw = "jumpthrow"
@@ -334,8 +339,8 @@ nade = "molotov"
 throw = "run leftright jumpthrow"
 
 [elbow_molly]
-pos = [-471.22, 279.42, 226.40]
-ang = [-8.47, -116.16, 0]
+pos = [-476.72, 279.42, 225.82]
+ang = [-8.52, -115.93, 0]
 help = [[-1035.31, -869.20, 417.05]]
 nade = "molotov"
 throw = "run throw"
@@ -348,15 +353,15 @@ nade = "flash"
 throw = "regular throw"
 
 [a_main_popflash]
-pos = [-1020.22, 819.42, 132.05]
-ang = [8.67, -158.36, 0]
+pos = [-1027.64, 826.84, 134.79]
+ang = [9.67, -155.42, 0]
 help = [[-1198.14, 748.85, 102.85]]
 nade = "flash"
 throw = "jumpthrow"
 
 [donut_popflash]
-pos = [-1629.22, -167.82, 170.46]
-ang = [-26.56, -33.44, 0]
+pos = [-1622.72, -167.82, 170.40]
+ang = [-26.98, -34.13, 0]
 help = [[-1376.36, -334.83, 321.95]]
 nade = "flash"
 throw = "regular throw"
@@ -369,50 +374,53 @@ nade = "flash"
 throw = "run throw"
 
 [elbow_flash]
-pos = [-568.22, 251.16, 224.00]
-ang = [1.76, -79.80, 0]
+pos = [-564.72, 251.16, 226.56]
+ang = [1.88, -79.97, 0]
 help = [[-360.71, -902.55, 188.07]]
 nade = "flash"
 throw = "run throw"
 
 [a_split_smoke]
-pos = [-912.22, -857.58, 100.03]
-ang = [-12.45, 53.25, 0]
+pos = [-912.22, -855.08, 99.62]
+ang = [-12.47, 53.20, 0]
 help = [[117.71, 521.80, 480.00]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [mid_box_a_ct_smoke]
-pos = [-280.22, -801.58, 98.42]
-ang = [-34.07, 131.47, 0]
+pos = [-285.52, -806.88, 97.86]
+ang = [-32.25, 107.41, 0]
 help = [[-291.01, -789.37, 109.44]]
 nade = "smoke"
 throw = "jumpthrow"
 
 [b_default_molly]
-pos = [908.54, -865.49, 86.29]
-ang = [-26.03, 105.67, 0]
+pos = [909.81, -859.11, 86.49]
+ang = [-26.50, 106.32, 0]
+lift = 4
 help = [[836.89, -610.12, 215.84]]
 nade = "molotov"
 throw = "regular throw"
 
 [b_cubby_molly]
-pos = [616.78, -610.58, 162.24]
-ang = [-38.36, 52.64, 0]
+pos = [624.63, -613.83, 161.69]
+ang = [-38.78, 55.24, 0]
+lift = 4
 help = [[727.67, -465.35, 306.89]]
 nade = "molotov"
 throw = "regular throw"
 
 [mid_flash]
-pos = [-209.00, -1968.00, -102.10]
-ang = [-19.90, 95.61, 0]
+pos = [-217.50, -1968.00, -102.07]
+ang = [-19.93, 94.32, 0]
 help = [[-246.00, -1591.00, 35.00]]
 nade = "flash"
 throw = "jumpthrow"
 
 [mid_flash2]
-pos = [-749.78, -1863.00, -86.83]
-ang = [-25.52, 86.08, 0]
+pos = [-735.28, -1863.00, -89.72]
+ang = [-25.80, 87.58, 0]
+lift = 4
 help = [[-711.95, -1311.58, 177.06]]
 nade = "flash"
 throw = "jumpthrow"

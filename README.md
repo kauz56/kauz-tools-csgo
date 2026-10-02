@@ -29,19 +29,29 @@ Practice settings (`settings.cfg`): cheats on, no bots, endless round, no freeze
 $65535 + buy anywhere, no per-match weapon limits, infinite ammo & utility (all nades except decoy),
 grenade trajectory preview. Switch teams with the native team menu (`M`).
 
+Type the commands one by one: CS2 expands all aliases of a line before it runs any of it,
+so `kt_set_map_de_mirage; kt_start` would still start the map picked before.
+
 Spawn numbering follows the map's entity order; maps with more than 5 spawns get more `kt_go_*` commands.
 
 ## Routines
 
 `data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
 `kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step,
-`kt_routine_help` toggles red markers at the `help` points of all steps on the current map). Each step teleports you and posts its title in chat.
+`kt_routine_help` toggles red markers at the `help` points of all steps on the current map). Each step teleports you and posts its title in chat;
+with help off you get a slightly wrong aim (varies per repeat) and walk forward left off the spot (not on spawn steps), with help on you land exactly on it.
 Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye height),
-or use `spawn = "ct_1"` for an exact map spawn. `lift = 20` raises the teleport if you get stuck in the floor. When the map changes,
-a load step is inserted; press `kt_routine_next` again once you're ingame.
+or use `spawn = "ct_1"` for an exact map spawn. Teleports start 4u above the spot and drop; `lift = 20` raises that further
+if you still get stuck in the floor. When the map changes, a load step is inserted; press `kt_routine_next` again once you're ingame.
+
+Known issues:
+- With help off the walk presses forward and left for you for 0.5s; pressing movement keys yourself during it (e.g. spamming forward/back)
+  fights with it. In a corner that blocks forward left you barely move.
+- A local server only gets your inventory a few seconds after you join, so you spawn with the default knife and gloves until you die once.
 
 Composite routines chain others: `data/routines/all.toml` is just `include = ["ancient", "nuke", "mirage"]`
-(steps of its own come after the included ones).
+(steps of its own come after the included ones). `{routine = "nuke", steps = [2, 3, 6]}` instead of a name takes only those steps,
+numbered as the nuke routine shows them ingame (`data/routines/mvp.toml`).
 
 ```toml
 [[step]]
@@ -67,6 +77,11 @@ throw = "jumpthrow"
 ```
 
 `./extract_lineups.py <workshop id or .vpk> <map>` generates that file from a practice workshop map (built like the Astralis utility maps).
+Its markers often sit inside a wall or above the floor, where a teleport gets stuck and CS2 unsticks you somewhere else.
+`./fixpos.py` repairs that with the running game (CS2 started with `-condebug`): load the map with `kt_start`,
+type `kt_remote` and run it. It moves every lineup of that map to the nearest spot where a player fits,
+sets `pos` to where he lands, aims again at the first `help` point and adds a `lift` where the teleport needs more room.
+`./fixpos.py --check` only reports; a second run changes nothing.
 For your own spots, stand at the spot, look at the aim point and run `kt_spot` ingame, then `./spot.py <name>` prints the lineup.
 
 <!-- custom spots disabled for now
@@ -89,7 +104,7 @@ ang = [-20.0, 45.0, 0.0]
 - `./gen.py --zip` — build `dist/kauz-tools-csgo.zip` (cfgs + Windows installer)
 - `./extract.py` — refresh `data/spawns/` from the map VPKs after map updates;
   needs [Source2Viewer-CLI](https://github.com/ValveResourceFormat/ValveResourceFormat/releases) in `.tools/s2v/`
-- `./extract_lineups.py`, `./spot.py` — see Lineups
+- `./extract_lineups.py`, `./fixpos.py`, `./spot.py` — see Lineups
 
 ## How it works
 
