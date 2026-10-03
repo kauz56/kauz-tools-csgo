@@ -1,2 +1,1 @@
-# every nade csnades.gg recommends on the premier maps
-recommended = true
+include = ["ancient", "anubis", "dust2", "inferno", "mirage", "nuke", "overpass"]

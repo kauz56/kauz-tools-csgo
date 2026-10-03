@@ -47,7 +47,7 @@ Known issues:
 - A local server only gets your inventory a few seconds after you join, so you spawn with the default knife and gloves until you die once.
 
 Composite routines chain others: `include = ["a", "b"]` puts the steps of those routines first.
-`recommended = true` adds every csnades lineup the site recommends (first, by map): that's `data/routines/all.toml`.
+`recommended = "de_mirage"` puts every csnades lineup the site recommends on that map first: `data/routines/<map>.toml`, `all.toml` includes them all.
 
 ```toml
 [[step]]
