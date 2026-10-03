@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Extract priority-0 spawns from CS2 map VPKs into data/spawns/<map>.toml."""
+"""Extract priority-0 spawns from CS2 defusal map VPKs into data/spawns/<map>.toml."""
 import os, re, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).parent
 CS2 = Path(os.environ.get("CS2_DIR", Path.home() / ".local/share/Steam/steamapps/common/Counter-Strike Global Offensive"))
 S2V = ROOT / ".tools/s2v/Source2Viewer-CLI"
-SKIP = re.compile(r"_vanity$|^workshop_preview_|^lobby_|^graphics_settings$")
+SKIP = re.compile(r"^(?!de_)|_vanity$")
 TEAMS = {"info_player_counterterrorist": "ct", "info_player_terrorist": "t"}
 
 

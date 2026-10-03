@@ -38,20 +38,17 @@ Spawn numbering follows the map's entity order; maps with more than 5 spawns get
 
 `data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
 `kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step,
-`kt_routine_help` toggles red markers at the `help` points of all steps on the current map). Each step teleports you and posts its title in chat;
-with help off you get a slightly wrong aim (varies per repeat) and walk forward left off the spot (not on spawn steps), with help on you land exactly on it.
+`kt_routine_help` toggles help: red markers at the `help` points of all steps on the current map, on by default). Each step teleports you and shows its title as a white text below your aim (chat drops lines when you step quickly);
+with help on you land exactly on the spot, with help off with a slightly wrong aim (varies per repeat).
 Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye height),
 or use `spawn = "ct_1"` for an exact map spawn. Teleports start 4u above the spot and drop; `lift = 20` raises that further
 if you still get stuck in the floor. When the map changes, a load step is inserted; press `kt_routine_next` again once you're ingame.
 
 Known issues:
-- With help off the walk presses forward and left for you for 0.5s; pressing movement keys yourself during it (e.g. spamming forward/back)
-  fights with it. In a corner that blocks forward left you barely move.
 - A local server only gets your inventory a few seconds after you join, so you spawn with the default knife and gloves until you die once.
 
 Composite routines chain others: `data/routines/all.toml` is just `include = ["ancient", "nuke", "mirage"]`
-(steps of its own come after the included ones). `{routine = "nuke", steps = [2, 3, 6]}` instead of a name takes only those steps,
-numbered as the nuke routine shows them ingame (`data/routines/mvp.toml`).
+(steps of its own come after the included ones).
 
 ```toml
 [[step]]
@@ -65,7 +62,7 @@ help = [[-911.27, -637.09, 102.27]]  # optional: world points to mark, e.g. wher
 ### Lineups
 
 A step can take its position from `data/lineups/<map>.toml` instead: `lineup = "redroom_smoke4"` fills in `pos`/`ang`/`help`
-and appends the throw to the title (`title` is optional then, keys set in the step win).
+and appends nade (unless the title names it) and throw to the title (`title` is optional then, keys set in the step win).
 
 ```toml
 [redroom_smoke4]
