@@ -58,6 +58,8 @@ def lineup(n, nade):
     throw = " ".join(t for t in (MOVEMENT.get(n.get("movement"), ""), TECHNIQUE.get(n.get("technique"), "")) if t)
     out = {"title": f"{n['titleTo']} from {n['titleFrom']}", "pos": [x, y, z], "ang": [p, yaw, 0], "nade": nade, "throw": throw,
            "team": n.get("team", "any"), "precision": n.get("precision", ""), "url": n["url"]}
+    if n.get("beginner"):  # the site's "recommended" filter
+        out["recommended"] = True
     if n.get("notes"):
         out["notes"] = n["notes"]
     return out

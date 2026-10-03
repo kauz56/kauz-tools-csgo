@@ -31,6 +31,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/a-cross-from-long-doors"
+recommended = true
 notes = ["Stand in corner", "Align to lamp and wire", "Run + Left click throw, release halfway to lamp"]
 
 ["a-cross-from-long-doors-b"]
@@ -64,6 +65,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/b-doors-from-outside-b-tunnels"
+recommended = true
 notes = ["Stand in corner", "Aim in inner corner of large spot", "Jump + Left click throw"]
 
 ["b-doors-from-outside-b-tunnels-b"]
@@ -152,6 +154,7 @@ throw = "walk jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/b-tunnels-from-ct-mid"
+recommended = true
 notes = ["Stand in corner", "Aim between first two door planks", "Walk + Jump + Left click throw"]
 
 ["b-window-from-outside-b-tunnels"]
@@ -163,6 +166,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/b-window-from-outside-b-tunnels"
+recommended = true
 notes = ["Stand in corner", "Aim at left of bottom dot", "Jump + Left click throw"]
 
 ["b-window-from-outside-b-tunnels-b"]
@@ -185,6 +189,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/bottom-mid-from-ct-mid"
+recommended = true
 notes = ["Stand in corner", "Aim at tip of scaffolding", "Left click throw"]
 
 ["car-from-outside-a-long"]
@@ -196,6 +201,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/car-from-outside-a-long"
+recommended = true
 notes = ["Stand in corner", "Aim at bottom left of tree", "Jump + Left click throw"]
 
 ["ct-mid-from-ct-spawn"]
@@ -207,6 +213,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/ct-mid-from-ct-spawn"
+recommended = true
 notes = ["Stand roughly in spawn", "Aim inside box at top right", "Left click throw"]
 
 ["ct-mid-from-outside-long"]
@@ -273,6 +280,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/ct-spawn-from-xbox"
+recommended = true
 notes = ["Stand in corner", "Aim between the dots", "Left click throw"]
 
 ["deep-tunnels-from-b-plat"]
@@ -295,6 +303,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/flashbangs/a-long-from-ct-cross"
+recommended = true
 notes = ["Stand to right of street sign", "Aim at middle of line/wire cover", "Run + Left click throw"]
 
 ["flash-a-long-from-long-doors"]
@@ -317,6 +326,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/flashbangs/a-long-from-outside-long"
+recommended = true
 notes = ["Stand at edge of wall", "Aim at bottom left of palm tree", "Jump + Left click throw"]
 
 ["flash-a-site-from-a-short"]
@@ -361,6 +371,7 @@ throw = "throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/dust2/flashbangs/b-site-from-ct-mid"
+recommended = true
 notes = ["Stand at edge of wall", "Align to door gap and wire", "Left click throw"]
 
 ["flash-b-site-from-upper-tunnels"]
@@ -383,6 +394,7 @@ throw = "run throw"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/dust2/flashbangs/b-site-from-upper-tunnels-b"
+recommended = true
 notes = ["Stand at bricks", "Aim at top right of arch", "Run + Left click throw"]
 
 ["flash-bottom-mid-from-ct-mid"]
@@ -394,6 +406,7 @@ throw = "walk throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/dust2/flashbangs/bottom-mid-from-ct-mid"
+recommended = true
 notes = ["Stand roughly on path", "Aim at building", "Walk + Left click throw"]
 
 ["flash-fence-from-upper-tunnels"]
@@ -405,6 +418,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/flashbangs/fence-from-upper-tunnels"
+recommended = true
 notes = ["Stand roughly here", "Aim above window", "Run + Left click throw"]
 
 ["flash-long-doors-from-ct-cross"]
@@ -416,6 +430,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/flashbangs/long-doors-from-ct-cross"
+recommended = true
 notes = ["Stand at edge of wall", "Aim above plus/cross", "Left click throw"]
 
 ["flash-long-doors-from-long-corner"]
@@ -449,6 +464,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/flashbangs/mid-doors-from-xbox"
+recommended = true
 notes = ["Stand in corner", "Aim at box corner", "Left click throw"]
 
 ["flash-pit-from-long-doors"]
@@ -504,6 +520,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/hegrenades/b-main-from-b-site"
+recommended = true
 notes = ["Stand next to box", "Aim above top of door arch", "Run + Left click throw"]
 
 ["he-back-plat-from-upper-tunnels"]
@@ -614,6 +631,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/long-doors-from-car"
+recommended = true
 notes = ["Stand below taxi sign", "Aim at bottom right of window", "Jump + Left click throw"]
 
 ["long-doors-from-car-b"]
@@ -746,6 +764,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "very_precise"
 url = "https://csnades.gg/dust2/molotovs/car-from-long-doors"
+recommended = true
 notes = ["Stand in corner on barrel", "Aim at top of black square next to door", "Jump + Left click throw"]
 
 ["molotov-catwalk-from-mid-doors"]
@@ -822,6 +841,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/molotovs/short-from-lower-tunnel"
+recommended = true
 notes = ["Stand in door frame", "Aim at corner of box", "Jump + Left click throw"]
 
 ["molotov-under-b-window-from-scaffolding"]
@@ -833,6 +853,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/dust2/molotovs/under-b-window-from-scaffolding"
+recommended = true
 notes = ["Stand in corner", "Aim at middle of shadow", "Jump + Left click throw"]
 
 ["short-from-short"]
@@ -844,6 +865,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/short-from-short"
+recommended = true
 notes = ["Stand in corner", "Aim at top of railing in gap", "Left click throw"]
 
 ["short-from-stairs"]
@@ -877,6 +899,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/tunnels-entry-from-upper-tunnels"
+recommended = true
 notes = ["Stand in middle of box", "Aim between dirts", "Left click throw"]
 
 ["window-from-t-spawn"]
@@ -943,6 +966,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/dust2/smokes/xbox-from-t-spawn-corner"
+recommended = true
 notes = ["Stand in corner", "Align above antenna and to shadow line", "Jump + Left click throw"]
 
 ["xbox-from-t-spawn-railing-a"]

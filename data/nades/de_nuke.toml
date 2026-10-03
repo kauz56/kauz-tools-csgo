@@ -9,6 +9,7 @@ throw = "middle click jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/nuke/smokes/a-main-from-t-roof"
+recommended = true
 notes = ["Break window", "Stand in corner", "Align to red dot and top of window", "Jump + Left+Right click throw"]
 
 ["a-main-from-t-roof-b"]
@@ -129,6 +130,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/nuke/flashbangs/a-site-from-t-roof-a"
+recommended = true
 notes = ["Shoot window", "Stand in middle", "Align to window and railing", "Jump + Left click throw"]
 
 ["flash-a-site-from-t-roof-b"]
@@ -162,6 +164,7 @@ throw = "run throw"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/nuke/flashbangs/hut-from-lobby-a"
+recommended = true
 notes = ["Stand roughly at corner", "Aim at door frame", "Run + Left click throw"]
 
 ["flash-ramp-from-trophy"]
@@ -446,6 +449,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/nuke/molotovs/hut-roof-from-silo"
+recommended = true
 notes = ["Stand on silo support", "Aim at top of line", "Left click throw"]
 
 ["molotov-outside-from-outside-ct"]
@@ -599,6 +603,7 @@ throw = "run throw"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/nuke/smokes/ramp-from-trophy-b"
+recommended = true
 notes = ["Stand in corner", "Aim at sign on corner", "Run + Left click throw"]
 
 ["secret-close-from-outside-t-spawn"]

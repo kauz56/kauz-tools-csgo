@@ -75,6 +75,7 @@ throw = "run jumpthrow"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/mirage/smokes/back-apts-from-b-site"
+recommended = true
 notes = ["Stand roughly here", "Align roughly to pillar and border", "Run + Jump + Left click throw"]
 
 ["bench-from-back-alley"]
@@ -86,6 +87,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/bench-from-back-alley"
+recommended = true
 notes = ["Stand at plank", "Aim a bit right of tip of building", "Left click throw"]
 
 ["bench-from-back-alley-b"]
@@ -108,6 +110,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/bottom-connector-from-apts-ramp"
+recommended = true
 notes = ["Stand in corner", "Aim at empty spot between carpet decorations", "Jump + Left click throw"]
 
 ["catwalk-from-b-short"]
@@ -119,6 +122,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/catwalk-from-b-short"
+recommended = true
 notes = ["Stand at right of door frame", "Aim at middle of shadow/crack", "Left click throw"]
 
 ["catwalk-from-t-spawn"]
@@ -185,6 +189,7 @@ throw = "throw"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/mirage/flashbangs/a-ramp-from-a-ramp"
+recommended = true
 notes = ["Stand to left of door frame", "Aim at top of lamp", "Left click throw"]
 
 ["flash-a-ramp-from-jungle"]
@@ -240,6 +245,7 @@ throw = "run jumpthrow"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/mirage/flashbangs/b-site-from-back-alley"
+recommended = true
 notes = ["Stand roughly at line", "Aim at middle pillar (lower is fine too)", "Run + Jump + Left click throw"]
 
 ["flash-b-site-from-back-apts"]
@@ -295,6 +301,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/flashbangs/mid-from-outside-t-apts"
+recommended = true
 notes = ["Stand at middle of wood", "Aim at top left of splash/dirt", "Jump + Left click throw"]
 
 ["flash-mid-window-from-jungle"]
@@ -306,6 +313,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/mirage/flashbangs/mid-window-from-jungle"
+recommended = true
 notes = ["Stand in corner", "Aim at wood", "Left click throw"]
 
 ["flash-stairs-from-stairs"]
@@ -339,6 +347,7 @@ throw = "run jumpthrow"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/mirage/flashbangs/top-mid-from-triple"
+recommended = true
 notes = ["Stand roughly here", "Aim between dots, at line", "Run + Jump + Left click throw"]
 
 ["flash-underpass-from-back-alley-stairs"]
@@ -504,6 +513,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/jungle-and-connector-from-t-roof-a"
+recommended = true
 notes = ["Stand at pillar between windows", "Aim 1/4 down from trapezoid, left of it", "Left click throw"]
 
 ["jungle-and-connector-from-t-roof-b"]
@@ -647,6 +657,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/market-window-from-back-alley"
+recommended = true
 notes = ["Stand in corner", "Aim at corner of bottom border", "Jump + Left click throw"]
 
 ["market-window-from-default-b"]
@@ -691,6 +702,7 @@ throw = "crouch walk jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/mid-window-from-t-spawn-a"
+recommended = true
 notes = ["Stand in corner next to trash can", "Crouch, aim at bottom of door frame", "Crouch walk 3/4th down border, Jump + Left click throw"]
 
 ["mid-window-from-t-spawn-b"]
@@ -735,6 +747,7 @@ throw = "run throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/mirage/molotovs/a-ramp-from-triple-box"
+recommended = true
 notes = ["Stand roughly on the stairs", "Aim at right windows", "Run + Left click throw"]
 
 ["molotov-b-apts-from-b-site"]
@@ -746,6 +759,7 @@ throw = "throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/mirage/molotovs/b-apts-from-b-site"
+recommended = true
 notes = ["Stand roughly here", "Aim at bottom of window", "Left click throw"]
 
 ["molotov-bench-from-b-apts"]
@@ -790,6 +804,7 @@ throw = "crouch throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/molotovs/dark-from-tetris"
+recommended = true
 notes = ["Stand in corner", "Crouch, aim at left of top wood", "Left click throw"]
 
 ["molotov-default-a-from-ramp"]
@@ -866,6 +881,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/mirage/molotovs/top-mid-boxes-from-window-blind"
+recommended = true
 notes = ["Stand in corner", "Align vertically to line and aim straight", "Move to back wall of window", "Run + Left click throw"]
 
 ["molotov-triple-box-from-tetris"]
@@ -910,6 +926,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/molotovs/van-from-b-apts"
+recommended = true
 notes = ["Stand roughly at couch", "Aim 1/3th of window, at ledge", "Run + Left click throw"]
 
 ["molotov-window-from-top-mid-boxes"]
@@ -921,6 +938,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/molotovs/window-from-top-mid-boxes"
+recommended = true
 notes = ["Stand behind cart", "Aim at bottom of antenna", "Run + Left click throw"]
 
 ["palace-from-ct-spawn"]
@@ -932,6 +950,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/palace-from-ct-spawn"
+recommended = true
 notes = ["Stand in corner", "Aim at top left of inner window", "Jump + Left click throw"]
 
 ["palace-from-outside-market"]
@@ -954,6 +973,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/right-arch-from-back-alley"
+recommended = true
 notes = ["Stand at right side of window", "Aim between edge and stick", "Left click throw"]
 
 ["right-arch-from-outside-t-apts"]
@@ -976,6 +996,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/stairs-from-a-ramp"
+recommended = true
 notes = ["Stand in front of edge", "Aim in center of gap/rectangle", "Left click throw"]
 
 ["stairs-from-a-ramp-b"]
@@ -1075,6 +1096,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/top-mid-from-t-spawn"
+recommended = true
 notes = ["Stand in corner on garbage", "Aim at tip of antenna", "Left click throw"]
 
 ["top-of-ticket-booth-from-a-ramp"]
@@ -1086,6 +1108,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/mirage/smokes/top-of-ticket-booth-from-a-ramp"
+recommended = true
 notes = ["Stand at corner", "Aim to left of stick", "Jump + Left click throw"]
 
 ["triple-from-a-ramp"]

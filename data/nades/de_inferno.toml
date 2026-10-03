@@ -64,6 +64,7 @@ throw = "run jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/arches-from-mid"
+recommended = true
 notes = ["Stand at left of wood/middle of truck", "Aim 45° from top of line", "Run + Jump + Left click throw"]
 
 ["arches-from-under-light-room"]
@@ -97,6 +98,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/b-entrance-from-ct"
+recommended = true
 notes = ["Stand in corner", "Aim at brick/light pole", "Left click throw"]
 
 ["b-entrance-from-moto"]
@@ -130,6 +132,7 @@ throw = "throw"
 team = "t"
 precision = "loose"
 url = "https://csnades.gg/inferno/smokes/boiler-from-alt-mid"
+recommended = true
 notes = ["Stand at middle of window", "Aim between windows", "Left click throw"]
 
 ["boiler-from-t-spawn"]
@@ -240,6 +243,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/coffins-from-half-wall-a"
+recommended = true
 notes = ["Stand in corner", "Crouch, aim in orange of \"B\"", "Jump + Left click throw"]
 
 ["ct-boost-from-banana"]
@@ -273,6 +277,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/ct-from-banana"
+recommended = true
 notes = ["Stand in corner", "Aim at tip of building", "Left click throw"]
 
 ["ct-from-banana-b"]
@@ -361,6 +366,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/flashbangs/balcony-from-apts"
+recommended = true
 notes = ["Stand at wood pillar", "Crouch, aim at left window", "Left click throw"]
 
 ["flash-banana-from-front-sandbags"]
@@ -405,6 +411,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/flashbangs/short-from-pit"
+recommended = true
 notes = ["Stand in corner", "Aim at tip of roof", "Left click throw"]
 
 ["flash-top-banana-from-ct"]
@@ -416,6 +423,7 @@ throw = "throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/inferno/flashbangs/top-banana-from-ct"
+recommended = true
 notes = ["Stand at edge of wall", "Aim between border tips", "Left click throw"]
 
 ["flash-top-mid-from-underpass"]
@@ -427,6 +435,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/flashbangs/top-mid-from-underpass"
+recommended = true
 notes = ["Stand in corner", "Aim between top of chimney and wall", "Left click throw"]
 
 ["front-graveyard-from-arch"]
@@ -438,6 +447,7 @@ throw = "middle click jumpthrow"
 team = "any"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/front-graveyard-from-arch"
+recommended = true
 notes = ["Stand at left of door frame", "Aim at dot on wall", "Jump + Left+Right click throw"]
 
 ["half-wall-from-church"]
@@ -471,6 +481,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/half-wall-from-ct-spawn"
+recommended = true
 notes = ["Stand in corner", "Aim a bit right of intersection of buildings", "Jump + Left click throw"]
 
 ["hay-from-alt-mid-3"]
@@ -636,6 +647,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/molotovs/banana-from-top-banana"
+recommended = true
 notes = ["Stand roughly at tip of shadow", "Aim at right of flower pot", "Run + Left click throw"]
 
 ["molotov-car-from-bottom-banana"]
@@ -713,6 +725,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "very_precise"
 url = "https://csnades.gg/inferno/molotovs/new-box-from-car"
+recommended = true
 notes = ["Stand in corner", "Align to bottom of spot and bottom of line", "Jump + Left click throw"]
 
 ["molotov-new-box-from-ct"]
@@ -724,6 +737,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/molotovs/new-box-from-ct"
+recommended = true
 notes = ["Stand in corner", "Aim to left of edge/tip", "Run + Left click throw"]
 
 ["molotov-oranges-from-car"]
@@ -735,6 +749,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/molotovs/oranges-from-car"
+recommended = true
 notes = ["Stand in corner of chair", "Aim at bottom right corner of pipe", "Left click throw"]
 
 ["molotov-pit-from-arch-side"]
@@ -768,6 +783,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/molotovs/quad-from-top-mid"
+recommended = true
 notes = ["Stand at middle of garage door", "Aim at roof support", "Run + Left click throw, release after a step"]
 
 ["molotov-second-oranges-from-car"]
@@ -790,6 +806,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/moto-from-alt-mid"
+recommended = true
 notes = ["Stand at right of garage door", "Aim at bottom of wood to left of window", "Jump + Left click throw"]
 
 ["moto-from-alt-mid-b"]
@@ -823,6 +840,7 @@ throw = "middle click jumpthrow"
 team = "any"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/moto-from-pit"
+recommended = true
 notes = ["Stand at center of wooden door", "Align to right of barrel and stone", "Jump + Left+Right click throw"]
 
 ["pit-from-alt-mid"]
@@ -834,6 +852,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/pit-from-alt-mid"
+recommended = true
 notes = ["Stand in corner", "Aim 45° to top right of \"A\"", "Jump + Left click throw"]
 
 ["pit-from-alt-mid-2"]
@@ -877,6 +896,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/inferno/smokes/top-mid-from-ct-spawn"
+recommended = true
 notes = ["Stand at edge of building", "Aim 1/3rd of the way of round support", "Jump + Left click throw"]
 
 ["top-mid-from-t-spawn"]

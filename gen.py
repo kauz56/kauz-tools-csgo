@@ -90,11 +90,14 @@ def lineup(st, cache={}):
 
 
 def expand(name, seen=()):
-    """steps of a routine; include = ["a", "b"] puts the steps of those routines first (composite routines)"""
+    """steps of a routine; include = ["a", "b"] puts the steps of those routines first (composite routines),
+    recommended = true the csnades lineups the site recommends (data/nades/) before them"""
     if name in seen:
         sys.exit(f"routine include loop: {' -> '.join(seen + (name,))}")
     data = tomllib.loads((ROOT / "data/routines" / f"{name}.toml").read_text())
-    return [st for inc in data.get("include", []) for st in expand(inc, seen + (name,))] + data.get("step", [])
+    rec = [{"map": f.stem, "lineup": k} for f in sorted((ROOT / "data/nades").glob("*.toml")) * bool(data.get("recommended"))
+           for k, v in tomllib.loads(f.read_text()).items() if v.get("recommended")]
+    return rec + [st for inc in data.get("include", []) for st in expand(inc, seen + (name,))] + data.get("step", [])
 
 
 def routine(name, steps):

@@ -20,6 +20,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "very_precise"
 url = "https://csnades.gg/anubis/smokes/b-main-from-ct-spawn"
+recommended = true
 notes = ["Stand in corner", "Aim at top right of brick/where lines meet", "Jump + Left click throw"]
 
 ["b-site-from-ruins"]
@@ -108,6 +109,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/anubis/smokes/bridge-from-ct-spawn"
+recommended = true
 notes = ["Stand in corner", "00:00:04.433 --> 00:00:06.849 Aim at tip", "Jump + Left click throw"]
 
 ["bridge-from-mid"]

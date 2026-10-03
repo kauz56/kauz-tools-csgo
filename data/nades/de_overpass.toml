@@ -64,6 +64,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/bank-from-mid-b"
+recommended = true
 notes = ["Stand in bench corner", "Aim at tip of wood", "Jump + Left click throw"]
 
 ["barrels-from-short-tunnel"]
@@ -75,6 +76,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/barrels-from-short-tunnel"
+recommended = true
 notes = ["Stand at dirt", "Align to left of post and top of bridge", "Left click throw"]
 
 ["barrels-from-water"]
@@ -97,6 +99,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/bathroom-from-fountain"
+recommended = true
 notes = ["Stand in corner", "Align to right ventilator and middle of leaves", "Left click throw"]
 
 ["bathroom-from-t-spawn"]
@@ -152,6 +155,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/dumpster-from-divider-bench"
+recommended = true
 notes = ["Stand on middle of bench", "Aim left of top left corner", "Left click throw"]
 
 ["dumpster-from-long"]
@@ -207,6 +211,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/flashbangs/a-site-from-divider"
+recommended = true
 notes = ["Stand at left divider", "Aim right of line under \"A\"", "Jump + Left click throw"]
 
 ["flash-bottom-connector-from-bottom-connector"]
@@ -218,6 +223,7 @@ throw = "right click"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/flashbangs/bottom-connector-from-bottom-connector"
+recommended = true
 notes = ["Stand in corner", "Aim at line corner on vent", "Right click throw"]
 
 ["flash-bottom-connector-from-construction"]
@@ -251,6 +257,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/flashbangs/monster-from-outside-monster-b"
+recommended = true
 notes = ["Stand at lines", "Aim at rightmost point of monster tunnel", "Jump + Left click throw"]
 
 ["flash-pillar-from-outside-monster"]
@@ -295,6 +302,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/flashbangs/t-stairs-from-divider"
+recommended = true
 notes = ["Stand at left divider", "Align to line and bottom of fence", "Jump + Left click throw"]
 
 ["flash-water-from-alley"]
@@ -317,6 +325,7 @@ throw = "run throw"
 team = "ct"
 precision = "loose"
 url = "https://csnades.gg/overpass/smokes/fountain-from-bathroom"
+recommended = true
 notes = ["Stand roughly in middle of hallway", "Align to trash can and middle of wall", "Run + Left click throw"]
 
 ["fountain-from-mid"]
@@ -361,6 +370,7 @@ throw = "run throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/hegrenades/barrels-from-water"
+recommended = true
 notes = ["Stand in corner", "Aim at white dot", "Run + Left click throw"]
 
 ["he-playground-from-mid"]
@@ -383,6 +393,7 @@ throw = "run throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/hegrenades/t-stairs-from-mid"
+recommended = true
 notes = ["Stand on top of right of trash can", "Aim at corner of leaves", "Run + Left click throw"]
 
 ["he-water-cubby-from-graffiti"]
@@ -426,6 +437,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/heaven-from-water"
+recommended = true
 notes = ["Stand in corner", "Aim at bottom of triangle", "Left click throw"]
 
 ["heaven-from-water-b"]
@@ -470,6 +482,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/mid-a-site-from-divider-bench"
+recommended = true
 notes = ["Stand on center of bench", "Aim at top corner of pole and lamp", "Left click throw"]
 
 ["mid-a-site-from-top-connector"]
@@ -503,6 +516,7 @@ throw = "crouch throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/molotovs/b-site-from-lower"
+recommended = true
 notes = ["Stand on drain", "Crouch, aim between graffiti and cement", "Left click throw"]
 
 ["molotov-barrels-from-monster"]
@@ -536,6 +550,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/molotovs/barrels-from-water-b"
+recommended = true
 notes = ["Stand in corner", "Aim at dot", "Jump + Left click throw"]
 
 ["molotov-dumpster-from-top-connector"]
@@ -622,6 +637,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/molotovs/water-from-b-entry"
+recommended = true
 notes = ["Stand at right of door frame", "Aim inside bright window", "Left click throw"]
 
 ["monster-from-ct-spawn"]
@@ -644,6 +660,7 @@ throw = "crouch jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/monster-from-ct-spawn-crouch"
+recommended = true
 notes = ["Stand in corner", "Crouch, align to tip of triangle and spool", "Jump + Left click throw"]
 
 ["monster-from-pit"]
@@ -666,6 +683,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/pit-from-water"
+recommended = true
 notes = ["Stand in corner", "Aim at top left corner", "Left click throw"]
 
 ["t-ramp-from-a-main"]
@@ -699,6 +717,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/overpass/smokes/truck-from-divider-bench"
+recommended = true
 notes = ["Stand in corner", "Aim below square/triangle at line", "Left click throw"]
 
 ["walkway-from-water"]

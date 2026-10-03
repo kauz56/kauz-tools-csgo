@@ -20,6 +20,7 @@ throw = "throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/a-main-from-big-box"
+recommended = true
 notes = ["Stand in corner", "Align to edge of bricks and top of wall", "Left click throw"]
 
 ["a-main-from-ct-d"]
@@ -97,6 +98,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/b-alley-from-ruins"
+recommended = true
 notes = ["Stand in corner", "Aim at bottom left corner of rectangle", "Jump + Left click throw"]
 
 ["b-doors-from-b-site"]
@@ -207,6 +209,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/b-ramp-from-ct-spawn"
+recommended = true
 notes = ["Stand in corner", "Align to lines on bricks", "Jump + Left click throw"]
 
 ["back-alley-from-catwalk"]
@@ -251,6 +254,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/back-alley-from-ruins-corner"
+recommended = true
 notes = ["Stand in corner", "Aim in middle of decoration", "Jump + Left click throw"]
 
 ["bottom-mid-from-ct-spawn-1"]
@@ -382,6 +386,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/ct-from-outside-a"
+recommended = true
 notes = ["Stand at middle of railing", "Aim at intersection of buildings", "Jump + Left click throw"]
 
 ["ct-from-t-spawn"]
@@ -601,6 +606,7 @@ throw = "middle click"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/flashbangs/catwalk-from-jaguar"
+recommended = true
 notes = ["Stand in corner", "Aim at spot on edge", "Left+Right click throw"]
 
 ["flash-catwalk-from-jaguar-b"]
@@ -645,6 +651,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/flashbangs/mid-from-t-mid"
+recommended = true
 notes = ["Stand at edge of wall", "Aim at leaf", "Left click throw"]
 
 ["flash-mid-from-t-spawn"]
@@ -689,6 +696,7 @@ throw = "run jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/hegrenades/back-wood-from-b-site"
+recommended = true
 notes = ["Stand in corner", "Aim at bottom of brick", "Run + Jump + Left click throw"]
 
 ["he-boost-from-b-long"]
@@ -700,6 +708,7 @@ throw = "crouch walk throw"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/hegrenades/boost-from-b-long"
+recommended = true
 notes = ["Stand on brick", "Crouch, aim at tip of leaves", "Crouch walk + Left click throw"]
 
 ["he-jaguar-rush-from-donut"]
@@ -765,6 +774,7 @@ throw = "walk throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/molotovs/a-default-from-a-main"
+recommended = true
 notes = ["Stand at edge of wall", "Aim at tip of border", "Walk + Left click throw"]
 
 ["molotov-boost-from-ct-spawn"]
@@ -787,6 +797,7 @@ throw = "jumpthrow"
 team = "ct"
 precision = "precise"
 url = "https://csnades.gg/ancient/molotovs/elbow-from-top-mid"
+recommended = true
 notes = ["Stand at right of wall", "Aim at chip on edge", "Jump + Left click throw"]
 
 ["molotov-long-alley-from-catwalk"]
@@ -864,6 +875,7 @@ throw = "throw"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/molotovs/wood-from-b-door"
+recommended = true
 notes = ["Stand in corner", "Aim where buildings meet", "Left click throw"]
 
 ["molotov-wood-from-ruins"]
@@ -908,6 +920,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/temple-from-outside-a"
+recommended = true
 notes = ["Stand at top of bush", "00:00:04.950 --> 00:00:07.066 Aim at at tip of brick", "Jump + Left click throw"]
 
 ["temple-from-outside-a-b"]
@@ -952,6 +965,7 @@ throw = "jumpthrow"
 team = "t"
 precision = "precise"
 url = "https://csnades.gg/ancient/smokes/top-mid-from-t-spawn"
+recommended = true
 notes = ["Stand at center of pillar", "Aim at center of second shaded line", "Jump + Left click throw"]
 
 ["top-mid-from-t-spawn-1"]
