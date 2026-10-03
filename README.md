@@ -22,6 +22,7 @@ kt_start               load it with practice settings
 kt_go_ct_1             teleport to CT spawn 1 (kt_go_t_1 for T)
 kt_go_ct_random        teleport to a random CT spawn (kt_go_t_random for T)
 kt_clear               remove all grenades, smokes and fires
+kt_get                 print setpos/setang of where you stand and look
 kt_help                list all commands, maps and routines
 ```
 
@@ -36,61 +37,43 @@ Spawn numbering follows the map's entity order; maps with more than 5 spawns get
 
 ## Routines
 
-`data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
-`kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step). Each step teleports you and says its title in chat;
-red markers show the `help` points of all steps on the current map.
-Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye height),
-or use `spawn = "ct_1"` for an exact map spawn. Teleports start 4u above the spot and drop; `lift = 20` raises that further
-if you still get stuck in the floor. When the map changes, a load step is inserted; press `kt_routine_next` again once you're ingame.
+`kt_set_routine_<name>` (then `kt_start`) steps through a list of lineups across maps: `kt_routine_next` / `kt_routine_prev`,
+`kt_routine_repos` repeats the current step. Each step teleports you onto the spot with the exact aim and says its title in chat.
+When the map changes, a load step is inserted; press `kt_routine_next` again once you're ingame.
+
+Shipped routines: one per premier map (`kt_set_routine_mirage`, ...) with every nade [csnades.gg](https://csnades.gg) recommends there,
+and `all` with all of them.
 
 Known issues:
 - A local server only gets your inventory a few seconds after you join, so you spawn with the default knife and gloves until you die once.
 
-Composite routines chain others: `include = ["a", "b"]` puts the steps of those routines first.
-`recommended = "de_mirage"` puts every csnades lineup the site recommends on that map first: `data/routines/<map>.toml`, `all.toml` includes them all.
+### Writing routines
+
+`data/routines/<name>.toml` becomes `kt_set_routine_<name>`:
 
 ```toml
+recommended = "de_mirage"         # optional: csnades' recommended nades of that map first
+include = ["dust2"]               # optional: then the steps of these routines
+
+[[step]]
+map = "de_mirage"
+lineup = "stairs-from-t-spawn"    # pos/ang/nade/throw from a lineup, title optional
+
 [[step]]
 map = "de_ancient"
 title = "red smoke"
-pos = [-1188.536499, -1134.898071, 59.460468]
-ang = [-0.92391, 110.507843, 0]
-help = [[-911.27, -637.09, 102.27]]  # optional: world points to mark, e.g. where to aim
+pos = [-1188.54, -1134.90, 59.46] # getpos / kt_get while standing (eye position)
+ang = [-0.92, 110.51, 0]
+help = [[-911.27, -637.09, 102.27]]  # optional: world points to mark red, e.g. where to aim
+lift = 20                         # optional: teleport higher if you get stuck in the floor (default 4u)
 ```
 
-### Lineups
+`spawn = "ct_1"` instead of `pos`/`ang` uses an exact map spawn.
 
-A step can take its position from a lineup instead: `lineup = "xbox-from-t-spawn"` fills in `pos`/`ang`/`help`
-and appends nade (unless the title names it) and throw to the title (`title` is optional then, keys set in the step win).
-Lineups come from `data/nades/<map>.toml` (all nades of the premier maps from [csnades.gg](https://csnades.gg), without
-community nades; key = the slug of its csnades URL, `molotov-`/`flash-`/`he-` prefix for non-smokes)
-and your own `data/lineups/<map>.toml` (wins on equal names). csnades lineups have no `help` points.
-
-```toml
-[redroom_smoke4]
-pos = [-1231.22, -1036.58, 75.33]
-ang = [-3.01, 51.31, 0]
-help = [[-911.27, -637.09, 102.27]]
-nade = "smoke"
-throw = "jumpthrow"
-```
-
-`./fetch_nades.py [map ...]` refreshes `data/nades/`. For your own spots, stand at the spot, look at the aim point and run `kt_get` ingame:
-it prints `setpos x y z;setang pitch yaw roll`, which are `pos` and `ang` of the lineup.
-
-<!-- custom spots disabled for now
-## Custom spots
-
-Add `data/spots/<map>.toml`, each table becomes a `kt_go_<name>` command (overrides spawns of the same name):
-
-```toml
-[a_smoke]
-pos = [-300.0, -1500.0, -160.0]
-ang = [-20.0, 45.0, 0.0]
-```
-
-`pos` is the feet position, as used by `setpos`.
--->
+Lineups come from `data/nades/<map>.toml` (all non-community nades of the premier maps from csnades.gg, refreshed with
+`./fetch_nades.py [map ...]`; key = slug of the csnades URL, `molotov-`/`flash-`/`he-` prefix for non-smokes) and your own
+`data/lineups/<map>.toml` (same keys as a step: `pos`, `ang`, optional `help`, `nade`, `throw`; wins on equal names).
+The title gets nade and throw appended unless it names them.
 
 ## Development
 
@@ -98,7 +81,7 @@ ang = [-20.0, 45.0, 0.0]
 - `./gen.py --zip` — build `dist/kauz-tools-csgo.zip` (cfgs + Windows installer)
 - `./extract.py` — refresh `data/spawns/` from the map VPKs after map updates;
   needs [Source2Viewer-CLI](https://github.com/ValveResourceFormat/ValveResourceFormat/releases) in `.tools/s2v/`
-- `./fetch_nades.py` — see Lineups
+- `./fetch_nades.py` — refresh `data/nades/` from csnades.gg
 
 ## How it works
 
