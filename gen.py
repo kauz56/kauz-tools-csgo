@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate cfg/kt/ from settings.cfg + data/spawns/<map>.toml + data/lineups/<map>.toml + data/routines/<name>.toml.
+"""Generate cfg/kt/ from settings.cfg + data/spawns/<map>.toml + data/{nades,lineups}/<map>.toml + data/routines/<name>.toml.
 
 ./gen.py         install into the local CS2 cfg dir
 ./gen.py --zip   build dist/kauz-tools-csgo.zip (Windows installer included)
@@ -15,20 +15,13 @@ HOOK = "// kauz-tools hook: runs kt_onload (no-op unless kt_start armed it)"
 # CS2 execs gamemode_<mode>_server.cfg last on every map load (see gamemodes.txt); kt_start forces casual
 MODES = ["casual"]
 CBUF = 32768  # CS2's command buffer: an exec'd cfg beyond this size loses its tail ("Command buffer full")
-SPOTS = 16  # kt_spot keeps this many recordings
 EYE = 64  # routines use getpos coordinates (standing eye position); setpos sets the feet
 LIFT = 4  # and start this far above the spot: right at the floor setpos gets stuck on slopes
-# kt_routine_help markers: flat unlit world texts facing the player at the help points of a map
+# help markers: flat unlit world texts facing the player at the help points of a map
 HELP_KV = ('"message" "X" "color" "255 0 0" "font_name" "Arial" "font_size" "80" "fullbright" "1" "enabled" "1" '
           '"reorient_mode" "1" "angles" "0 0 90" "justify_horizontal" "1" "justify_vertical" "1"')  # roll 90: upright
 HELP_SCALE = 0.0002  # world_units_per_pixel per unit of distance to the step's position: same apparent size for far markers
 HELP_PULL = 0.012  # markers move this fraction of the distance along the line of sight towards the step's position
-# with help off a step teleports onto its spot with a slightly wrong aim (cycling through FUZZ variants)
-FUZZ, FUZZ_PITCH, FUZZ_YAW = 4, (2, 5), (4, 10)
-# step titles: a world text in front of the step's aim instead of chat, which drops lines when stepping quickly
-TITLE_KV = ('"color" "255 255 255" "font_name" "Arial" "font_size" "80" "fullbright" "1" "enabled" "1" "world_units_per_pixel" "0.01" '
-            '"reorient_mode" "1" "angles" "0 0 90" "justify_horizontal" "1" "justify_vertical" "1"')
-TITLE_DIST, TITLE_DROP = 40, 12  # units in front of the eye, degrees below the aim
 NADE_WORDS = {"molotov": ("molotov", "molly", "incendiary"), "flash": ("flash", "pop")}  # lineup nade -> words naming it in a title
 
 
@@ -39,13 +32,6 @@ def num(x):
 def teleport(v, eye=0):
     x, y, z = v["pos"]
     return f'setpos {num(x)} {num(y)} {num(z - eye)}; setang {" ".join(map(num, v["ang"]))}'
-
-
-def fuzz(v, eye, rng):
-    """teleport to v with the aim turned by FUZZ_PITCH/FUZZ_YAW degrees"""
-    p, yaw, roll = v["ang"]
-    sign = lambda: rng.choice((-1, 1))
-    return teleport(v | {"ang": (round(p + sign() * rng.uniform(*FUZZ_PITCH), 2), round(yaw + sign() * rng.uniform(*FUZZ_YAW), 2), roll)}, eye)
 
 
 def load(name):
@@ -90,20 +76,13 @@ def markers(points):
     return out + "ent_fire player FireUser1\n"
 
 
-def caption(text, eye, ang):
-    """routine step title cfg: a world text below the aim, placed like the help markers"""
-    p, y = math.radians(ang[0] + TITLE_DROP), math.radians(ang[1])
-    at = " ".join(num(round(e + TITLE_DIST * d, 2)) for e, d in zip(eye, (math.cos(p) * math.cos(y), math.cos(p) * math.sin(y), -math.sin(p))))
-    return (f'ent_fire kt_title kill\nent_create point_worldtext {{"targetname" "kt_title" "origin" "{at}" "message" "{text.replace(chr(34), "")}" {TITLE_KV}}}\n'
-            + "".join(f'ent_fire player AddOutput "OnUser2>kt_title>SetAbsOrigin>{at}>{d}>1"\n' for d in (0.2, 1.5)) + "ent_fire player FireUser2\n")
-
-
 def lineup(st, cache={}):
-    """step with its lineup (data/lineups/<map>.toml) filled in, nade (unless the title names it) and throw appended to the title"""
+    """step with its lineup (data/nades or data/lineups/<map>.toml) filled in, nade (unless the title names it) and throw appended to the title"""
     if "lineup" not in st:
         return st
-    if st["map"] not in cache:
-        cache[st["map"]] = tomllib.loads((ROOT / "data/lineups" / f"{st['map']}.toml").read_text())
+    if st["map"] not in cache:  # csnades.gg nades (fetch_nades.py), own lineups win
+        cache[st["map"]] = {k: v for kind in ("nades", "lineups") if (f := ROOT / "data" / kind / f"{st['map']}.toml").exists()
+                            for k, v in tomllib.loads(f.read_text()).items()}
     st = {"title": st["lineup"].replace("_", " ")} | cache[st["map"]][st["lineup"]] | st
     nade = st.get("nade", "") * all(w not in st["title"].lower() for w in NADE_WORDS.get(st.get("nade"), (st.get("nade"),)))
     throw = ", ".join(t for t in (nade, "crouch" * (st.get("crouch", False) and "crouch" not in st.get("throw", "")), st.get("throw")) if t)
@@ -119,10 +98,8 @@ def expand(name, seen=()):
 
 
 def routine(name, steps):
-    """kt_set_routine_<name>: step list with a map-load step whenever the map changes. Returns the cfg, the two mode
-    cfgs (help on/off) that point the teleport {rs}<i>t of every step at its exact or fuzzed variant (CS2 expands all
-    aliases of a line before running it, so a step can't repoint an alias and call it in one go), and per map a cfg with
-    the teleports of its steps, exec'd by its load step: all in one cfg overflows CS2's command buffer. t<i>: title of step i."""
+    """kt_set_routine_<name>: step list with a map-load step whenever the map changes. Returns the cfg and per map a cfg with
+    the teleports of its steps, exec'd by its load step: all in one cfg overflows CS2's command buffer."""
     seq, cur, part = [], None, {}  # part: load step -> number of its teleport cfg
     for st in steps:
         if st["map"] != cur:
@@ -135,38 +112,30 @@ def routine(name, steps):
             v, eye = st, EYE - LIFT - st.get("lift", 0)
         seq.append((cur, (v, eye), st["title"]))
     n, rs = len(seq), f"kt_rs_{name}_"
-    # a routine starts with help on
-    out = (f'alias kt_mode_x "exec kt/routines/{name}_x"\nalias kt_mode_f "exec kt/routines/{name}_f"\nexec kt/routines/{name}_x\n'
-           f'alias {rs}{n} "ent_fire kt_title kill; say routine done"\nalias {rs}-1 "ent_fire kt_title kill; say routine start"\n')
-    rng, modes, parts, titles = random.Random(name), {"x": "", "f": ""}, [], {}
+    out = (f'alias {rs}{n} "say routine done"\nalias {rs}-1 "say routine start"\n')
+    parts = []
     for i, (m, tp, title) in enumerate(seq):
         if tp is None:
             parts.append("")
             continue
-        # {rs}<i>x: exact and redraws the markers, a map load removes them (help on), {rs}<i>f: fuzzed (help off; cycles through the variants)
-        v, eye = tp
-        x, y, z = v["pos"]
-        titles[f"t{i}"] = caption(f"[{i + 1}/{n}] {title}", (x, y, z + EYE * (eye == 0)), v["ang"])
-        parts[-1] += f'alias {rs}{i}x "{teleport(v, eye)}; kt_help_draw"\nalias {rs}{i}f {rs}{i}f0\n' + "".join(
-            f'alias {rs}{i}f{k} "{fuzz(v, eye, rng)}; alias {rs}{i}f {rs}{i}f{(k + 1) % FUZZ}"\n' for k in range(FUZZ))
-        for mode in modes:
-            modes[mode] += f"alias {rs}{i}t {rs}{i}{mode}\n"
-        seq[i] = (m, f"exec kt/routines/{name}_t{i}; {rs}{i}t", title)
+        # {rs}<i>t: teleport and redraw the markers, a map load removes them
+        parts[-1] += f'alias {rs}{i}t "{teleport(*tp)}; kt_help_draw"\n'
+        seq[i] = (m, f"{rs}{i}t", title)
     for i, (m, action, title) in enumerate(seq):
         nxt, prev = i + 1, i - 1
         if action is None:
             action, prev = f"exec kt/routines/{name}_{part[i]}; {launch(m)}", f"b{i + 1}" if i else -1
             # {rs}<i>s: the load step reached back from its map, which is loaded already
             out += (f'alias {rs}{i}s "alias kt_routine_next {rs}{nxt}; alias kt_routine_prev {rs}{prev}; alias kt_routine_repos {rs}{i}s; '
-                    f'ent_fire kt_title kill; say [{i + 1}/{n}] load {m}"\n')
+                    f'say [{i + 1}/{n}] load {m}"\n')
         elif seq[i - 1][1] is None:
             prev = f"{i - 1}s"
             if i > 1:  # back from the load step: reload the previous map first
                 out += (f'alias {rs}b{i} "alias kt_routine_next {rs}{i - 2}; alias kt_routine_prev {rs}{i - 2}; alias kt_routine_repos {rs}b{i}; '
                         f'echo load {seq[i - 2][0]} (kt_routine_next when ingame); exec kt/routines/{name}_{part[i - 1] - 1}; {launch(seq[i - 2][0])}"\n')
         out += (f'alias {rs}{i} "alias kt_routine_next {rs}{nxt}; alias kt_routine_prev {rs}{prev}; alias kt_routine_repos {rs}{i}; '
-                f'echo [{i + 1}/{n}] {title}; {action}"\n')  # action last: map changes may drop the rest
-    return out, modes | {str(k): t for k, t in enumerate(parts)} | titles
+                f'say [{i + 1}/{n}] {title}; {action}"\n')  # action last: map changes may drop the rest
+    return out, {str(k): t for k, t in enumerate(parts)}
 
 
 def build(cfg):
@@ -202,27 +171,16 @@ def build(cfg):
             + (f'alias kt_help_draw "exec kt/help/{m}"\n' if m in points else ""))
         if m in points:
             (out / "help" / f"{m}.cfg").write_text(markers(points[m]))
-    # kt_spot: a grenade annotation holds stand position and view angles, a surface text the point looked at; spot.py reads the file
-    for i in range(SPOTS):  # rotating slots, spot.py picks them by age
-        # annotations are only allowed here, see settings.cfg
-        (out / f"spot_{i}.cfg").write_text('sv_allow_annotations_access_level 2\nannotation_clear\n'
-                                           'annotation_create grenade smoke "kt"\nannotation_create text "kt" "" surface\n'
-                                           f'annotation_save kt_spot_{i}\nannotation_clear\nsv_allow_annotations_access_level 0\n')
     (out / "routines").mkdir()
     for name, steps in list(routines.items()):
         text, files = routine(name, steps)
-        if (size := max(len(text) + len(files["x"]), *map(len, files.values()))) > CBUF:
+        if (size := max(len(text), *map(len, files.values()))) > CBUF:
             print(f"skipping routine {name}: {size} bytes don't fit CS2's command buffer ({CBUF})")
             del routines[name]
             continue
         (out / "routines" / f"{name}.cfg").write_text(text)
         for part, t in files.items():
             (out / "routines" / f"{name}_{part}.cfg").write_text(t)
-    # kt_remote: fixpos.py drives the game through kt/remote_cmd.cfg, which a point_servercommand execs ten times a second
-    rearm = 'ent_fire player AddOutput "OnUser3>kt_remote>Command>exec kt/remote_tick>0.1>1"\nent_fire player FireUser3\n'
-    (out / "remote.cfg").write_text('ent_fire kt_remote kill\nent_create point_servercommand {"targetname" "kt_remote"}\n' + rearm)
-    (out / "remote_tick.cfg").write_text("exec kt/remote_cmd\n" + rearm)
-    (out / "remote_cmd.cfg").write_text("")
     usage = [
         "kauz-tools commands",
         "  kt_set_map_<map>        pick a map, then kt_start",
@@ -231,16 +189,13 @@ def build(cfg):
         "  kt_go_ct_<n>, kt_go_t_<n>, kt_go_ct_random, kt_go_t_random   teleport to a spawn",
         "  kt_clear                remove all grenades, smokes and fires",
         "  kt_routine_next / kt_routine_prev / kt_routine_repos   step through a routine",
-        "  kt_routine_help         toggle aim markers",
-        "  kt_spot                 record stand position and aim point (read with spot.py)",
-        "  kt_remote               let fixpos.py drive the game",
+        "  kt_get                  print setpos/setang of where you stand and look (pos/ang of a lineup)",
         "maps: " + " ".join(maps),
         "routines: " + " ".join(routines),
     ]
     (out / "usage.cfg").write_text("".join(f'echo "{line}"\n' for line in usage))
     (out / "init.cfg").write_text(
         'alias kt_help "exec kt/usage"\n'
-        'alias kt_remote "exec kt/remote"\n'
         'alias kt_noop ""\n'
         'alias kt_onload kt_noop\n'
         'alias kt_load "echo kt: kt_set_map_<map> first"\n'
@@ -250,16 +205,10 @@ def build(cfg):
         'alias kt_launch "alias kt_onload kt_apply; game_type 0; game_mode 0; kt_load"\n'
         'alias kt_begin kt_launch\n'
         'alias kt_start kt_begin\n'
-        'alias kt_apply "exec kt/settings; alias kt_routine_help kt_help_off; kt_mode_x"\n'  # help on, routine steps draw the markers
-        'alias kt_spot kt_sp_0\n'
-        + "".join(f'alias kt_sp_{i} "exec kt/spot_{i}; alias kt_spot kt_sp_{(i + 1) % SPOTS}"\n' for i in range(SPOTS))
+        'alias kt_apply "exec kt/settings"\n'
+        'alias kt_get getpos\n'
         + "".join(f'alias kt_set_map_{m} "exec kt/maps/{m}; alias kt_begin kt_launch"\n' for m in maps)
         + 'alias kt_routine_next "echo kt: kt_set_routine_<name> first"\nalias kt_routine_prev kt_routine_next\nalias kt_routine_repos kt_routine_next\n'
-        # kt_routine_help toggles the markers of the current map
-        # and switches the teleports of the routine between exact (help on) and fuzzed (help off)
-        + 'alias kt_help_on "kt_help_draw; alias kt_routine_help kt_help_off; kt_mode_x"\n'
-        + 'alias kt_help_off "ent_fire kt_help* kill; alias kt_routine_help kt_help_on; kt_mode_f"\n'
-        + 'alias kt_routine_help kt_help_on\nalias kt_mode_x kt_noop\nalias kt_mode_f kt_noop\n'
         + "".join(f'alias kt_set_routine_{r} "exec kt/routines/{r}; alias kt_begin kt_rs_{r}_0"\n' for r in routines)
         + "exec kt/reset\n")
     return maps, names

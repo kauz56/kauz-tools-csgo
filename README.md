@@ -37,9 +37,8 @@ Spawn numbering follows the map's entity order; maps with more than 5 spawns get
 ## Routines
 
 `data/routines/<name>.toml` becomes `kt_set_routine_<name>` (then `kt_start`): a list of positions across maps, stepped through with
-`kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step,
-`kt_routine_help` toggles help: red markers at the `help` points of all steps on the current map, on by default). Each step teleports you and shows its title as a white text below your aim (chat drops lines when you step quickly);
-with help on you land exactly on the spot, with help off with a slightly wrong aim (varies per repeat).
+`kt_routine_next` / `kt_routine_prev` (`kt_routine_repos` repeats the current step). Each step teleports you and says its title in chat;
+red markers show the `help` points of all steps on the current map.
 Copy `pos`/`ang` from `getpos` while standing (`gen.py` subtracts the 64u eye height),
 or use `spawn = "ct_1"` for an exact map spawn. Teleports start 4u above the spot and drop; `lift = 20` raises that further
 if you still get stuck in the floor. When the map changes, a load step is inserted; press `kt_routine_next` again once you're ingame.
@@ -47,8 +46,7 @@ if you still get stuck in the floor. When the map changes, a load step is insert
 Known issues:
 - A local server only gets your inventory a few seconds after you join, so you spawn with the default knife and gloves until you die once.
 
-Composite routines chain others: `data/routines/all.toml` is just `include = ["ancient", "nuke", "mirage"]`
-(steps of its own come after the included ones).
+Composite routines chain others: `include = ["a", "b"]` puts the steps of those routines first.
 
 ```toml
 [[step]]
@@ -61,8 +59,11 @@ help = [[-911.27, -637.09, 102.27]]  # optional: world points to mark, e.g. wher
 
 ### Lineups
 
-A step can take its position from `data/lineups/<map>.toml` instead: `lineup = "redroom_smoke4"` fills in `pos`/`ang`/`help`
+A step can take its position from a lineup instead: `lineup = "xbox-from-t-spawn"` fills in `pos`/`ang`/`help`
 and appends nade (unless the title names it) and throw to the title (`title` is optional then, keys set in the step win).
+Lineups come from `data/nades/<map>.toml` (all nades of the premier maps from [csnades.gg](https://csnades.gg), without
+community nades; key = the slug of its csnades URL, `molotov-`/`flash-`/`he-` prefix for non-smokes)
+and your own `data/lineups/<map>.toml` (wins on equal names). csnades lineups have no `help` points.
 
 ```toml
 [redroom_smoke4]
@@ -73,13 +74,8 @@ nade = "smoke"
 throw = "jumpthrow"
 ```
 
-`./extract_lineups.py <workshop id or .vpk> <map>` generates that file from a practice workshop map (built like the Astralis utility maps).
-Its markers often sit inside a wall or above the floor, where a teleport gets stuck and CS2 unsticks you somewhere else.
-`./fixpos.py` repairs that with the running game (CS2 started with `-condebug`): load the map with `kt_start`,
-type `kt_remote` and run it. It moves every lineup of that map to the nearest spot where a player fits,
-sets `pos` to where he lands, aims again at the first `help` point and adds a `lift` where the teleport needs more room.
-`./fixpos.py --check` only reports; a second run changes nothing.
-For your own spots, stand at the spot, look at the aim point and run `kt_spot` ingame, then `./spot.py <name>` prints the lineup.
+`./fetch_nades.py [map ...]` refreshes `data/nades/`. For your own spots, stand at the spot, look at the aim point and run `kt_get` ingame:
+it prints `setpos x y z;setang pitch yaw roll`, which are `pos` and `ang` of the lineup.
 
 <!-- custom spots disabled for now
 ## Custom spots
@@ -101,7 +97,7 @@ ang = [-20.0, 45.0, 0.0]
 - `./gen.py --zip` — build `dist/kauz-tools-csgo.zip` (cfgs + Windows installer)
 - `./extract.py` — refresh `data/spawns/` from the map VPKs after map updates;
   needs [Source2Viewer-CLI](https://github.com/ValveResourceFormat/ValveResourceFormat/releases) in `.tools/s2v/`
-- `./extract_lineups.py`, `./fixpos.py`, `./spot.py` — see Lineups
+- `./fetch_nades.py` — see Lineups
 
 ## How it works
 
